@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme tokens — light palette ("daytime.sav") ───────────────────────── */
+:root {
+  --bg: #ede9f7; /* Lavender */
+  --surface: #ffffff; /* White (windows) */
+  --ink: #16161f; /* Text / borders */
+  --accent-pink: #ff3ec9;
+  --accent-violet: #7c5cff;
+  --accent-lime: #c6ff3e;
+}
+
+/* ── Theme tokens — dark palette ("nighttime.sav") ──────────────────────── */
+.dark {
+  --bg: #16161f; /* Deep ink */
+  --surface: #211f2e; /* Dark surface (windows) */
+  --ink: #f0edf8; /* Off-white */
+  --accent-pink: #ff5ed4; /* slightly lifted */
+  --accent-violet: #9d85ff;
+  --accent-lime: #d4ff66;
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-grotesk), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Y2K dotted-selection focus rectangle (accessibility: visible focus). */
+:focus-visible {
+  outline: 2px dotted var(--ink);
+  outline-offset: 3px;
+}

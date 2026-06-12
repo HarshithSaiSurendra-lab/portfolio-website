@@ -2,8 +2,8 @@
 
 This file is read at the start of every Claude Code session. It is the standing
 contract for this project. The full build specification lives in
-**`portfolio-spec-final.md`** in this directory — read it in full before doing
-anything in a fresh session. If this file and the spec ever conflict, ask Psy.
+**`files/portfolio-spec-final.md`** — read it in full before doing anything in a
+fresh session. If this file and the spec ever conflict, ask Psy.
 
 ---
 
@@ -87,8 +87,8 @@ The site must read as "fun person, serious work" — never as a joke site.
 
 Update the checkboxes as gates are passed. Phase details in spec §11.
 
-- [ ] **Phase 1 — Foundation** (scaffold, tokens both themes, fonts, no-flash script,
-      basic toggle) → 🚦 Gate 1: token/typography demo page
+- [x] **Phase 1 — Foundation** (scaffold, tokens both themes, fonts, no-flash script,
+      basic toggle) → 🚦 Gate 1: token/typography demo page — ✅ APPROVED
 - [ ] **Phase 2 — Core Components** (WindowCard+drag, Ticker, Dock, LoadingBar,
       AchievementToast shell) → 🚦 Gate 2: component playground
 - [ ] **Phase 3 — Main Page Sections** (hero, about+stat card+shelf, experience,
