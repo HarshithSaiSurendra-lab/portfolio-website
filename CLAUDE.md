@@ -89,8 +89,8 @@ Update the checkboxes as gates are passed. Phase details in spec §11.
 
 - [x] **Phase 1 — Foundation** (scaffold, tokens both themes, fonts, no-flash script,
       basic toggle) → 🚦 Gate 1: token/typography demo page — ✅ APPROVED
-- [ ] **Phase 2 — Core Components** (WindowCard+drag, Ticker, Dock, LoadingBar,
-      AchievementToast shell) → 🚦 Gate 2: component playground
+- [x] **Phase 2 — Core Components** (WindowCard+drag, Ticker, Dock, LoadingBar,
+      AchievementToast shell) → 🚦 Gate 2: component playground — ✅ APPROVED
 - [ ] **Phase 3 — Main Page Sections** (hero, about+stat card+shelf, experience,
       Invexs, projects, quest log) → 🚦 Gate 3: FULL copy review. Blocked by Q8, Q9.
 - [ ] **Phase 4 — Resume & Contact** (HTML /resume + PDF download + View Transition;
