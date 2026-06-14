@@ -8,6 +8,7 @@ import {
   type MainEntry,
   type StreakEntry,
 } from "@/lib/leaderboard";
+import { getKv, kvConfigured } from "@/lib/kv";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -16,14 +17,10 @@ const MAIN_KEY = "leaderboard:main";
 const STREAK_KEY = "leaderboard:streak";
 const MAX_TIME_MS = 60 * 60 * 1000; // an hour is plenty; rejects bogus values
 
-// The board is global only once a Vercel KV / Upstash store is connected.
-// Until then the route reports configured:false and the client keeps scores in
-// localStorage so the feature is still previewable (see components/arcade).
-function isConfigured(): boolean {
-  return Boolean(
-    process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN,
-  );
-}
+// The board is global only once a Vercel KV / Upstash store is connected (the
+// env-var plumbing for either lives in @/lib/kv). Until then the route reports
+// configured:false and the client keeps scores in localStorage so the feature
+// is still previewable (see components/arcade).
 
 // Light, best-effort rate limit (mirrors the contact route): in-memory per warm
 // instance — enough to blunt casual score spam alongside server-side validation.
@@ -40,10 +37,10 @@ function rateLimited(ip: string): boolean {
 }
 
 export async function GET() {
-  if (!isConfigured()) {
+  if (!kvConfigured()) {
     return NextResponse.json({ configured: false, ...EMPTY_BOARDS });
   }
-  const { kv } = await import("@vercel/kv");
+  const kv = getKv();
   const [main, streak] = await Promise.all([
     kv.get<MainEntry[]>(MAIN_KEY),
     kv.get<StreakEntry[]>(STREAK_KEY),
@@ -86,7 +83,7 @@ export async function POST(req: Request) {
   }
 
   // Not configured: tell the client so it can persist locally instead.
-  if (!isConfigured()) {
+  if (!kvConfigured()) {
     return NextResponse.json({ configured: false, ...EMPTY_BOARDS });
   }
 
@@ -101,7 +98,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const { kv } = await import("@vercel/kv");
+  const kv = getKv();
   const [curMain, curStreak] = await Promise.all([
     kv.get<MainEntry[]>(MAIN_KEY),
     kv.get<StreakEntry[]>(STREAK_KEY),

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getKv, kvConfigured } from "@/lib/kv";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,26 +11,22 @@ export const dynamic = "force-dynamic";
 const VISITS_KEY = "visits:count";
 const SEED = 250;
 
-function isConfigured(): boolean {
-  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
-}
-
 // GET — read the current count without incrementing.
 export async function GET() {
-  if (!isConfigured()) {
+  if (!kvConfigured()) {
     return NextResponse.json({ configured: false, count: SEED });
   }
-  const { kv } = await import("@vercel/kv");
+  const kv = getKv();
   const count = (await kv.get<number>(VISITS_KEY)) ?? SEED;
   return NextResponse.json({ configured: true, count });
 }
 
 // POST — register a new session visit (called once per session by the client).
 export async function POST() {
-  if (!isConfigured()) {
+  if (!kvConfigured()) {
     return NextResponse.json({ configured: false, count: SEED });
   }
-  const { kv } = await import("@vercel/kv");
+  const kv = getKv();
   // Seed on first ever touch so the counter starts at the floor, not at 1.
   const exists = await kv.exists(VISITS_KEY);
   if (!exists) {
