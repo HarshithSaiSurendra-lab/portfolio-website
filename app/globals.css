@@ -108,6 +108,91 @@ body {
   animation: toast-in 0.28s ease-out both;
 }
 
+/* ── Boot sequence progress bar (spec §6.4) ─────────────────────────────── */
+/* Fills left→right once over the boot duration. GPU-composited scaleX; the
+   whole overlay is suppressed under reduced motion by the component itself. */
+@keyframes boot-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.boot-bar {
+  transform-origin: left center;
+  animation: boot-bar 1.3s linear forwards;
+}
+
+/* ── CRT power-off theme transition (spec §6.3) ─────────────────────────── */
+/* The overlay blacks out the viewport (hiding the theme swap that happens mid-
+   animation); the inner "screen" collapses to a bright horizontal line and
+   reopens — the classic CRT power-cycle. ≤1s. Under reduced motion the picker
+   skips this entirely and swaps instantly. */
+@keyframes crt-overlay-fade {
+  0%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes crt-screen-collapse {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  40% {
+    transform: scaleY(0.004);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleY(0.004);
+    opacity: 0.9;
+  }
+  90%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+.crt-overlay {
+  background: #05050a;
+  animation: crt-overlay-fade 0.6s ease-in-out forwards;
+}
+
+.crt-screen {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+  background: #f3f3ff;
+  box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.6);
+  animation: crt-screen-collapse 0.6s ease-in-out forwards;
+}
+
+/* ── Easter-egg confetti (spec §6.5, pure CSS) ──────────────────────────── */
+/* Each piece arcs out from the hero name and fades. Per-piece trajectory comes
+   from inline --dx/--dy/--rot/--dur custom properties. Suppressed entirely
+   under reduced motion (the component also skips emitting pieces there). */
+@keyframes confetti-fly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx, 0), var(--dy, 0)) rotate(var(--rot, 0deg));
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  animation: confetti-fly var(--dur, 1.2s) ease-out forwards;
+}
+
 /* ── Hero CRT scanline / dither overlay (CSS-only, very low opacity) ─────── */
 .scanlines::after {
   content: "";
@@ -148,7 +233,11 @@ section[id] {
 @media (prefers-reduced-motion: reduce) {
   .ticker-track,
   .bar-stripe,
-  .toast-in {
+  .toast-in,
+  .boot-bar,
+  .confetti-piece,
+  .crt-overlay,
+  .crt-screen {
     animation: none !important;
     transform: none !important;
   }

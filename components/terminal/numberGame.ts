@@ -1,45 +1,31 @@
 // The number-guessing game (spec §6.6) — a web port of the first program Sai
-// ever wrote in Python. Lazy-loaded: this module is only fetched when a visitor
-// runs `play` in the terminal, so it costs nothing until then (spec §8).
-// Copy here is DRAFT humor — approved at Gate 5.
+// ever wrote in Python. Lazy-loaded: only fetched when a visitor runs `play`,
+// so it costs nothing otherwise (spec §8). Copy here is DRAFT — approved at the
+// gate. Now timed + capped at 7 guesses so it can be lost, which makes the
+// leaderboard and win-streaks meaningful.
 
-const BEST_KEY = "psy:guess-best"; // fewest guesses in a winning run
-
-function readBest(): number | null {
-  try {
-    const raw = localStorage.getItem(BEST_KEY);
-    const n = raw ? Number(raw) : NaN;
-    return Number.isFinite(n) && n > 0 ? n : null;
-  } catch {
-    return null;
-  }
-}
-
-function writeBest(n: number): void {
-  try {
-    localStorage.setItem(BEST_KEY, String(n));
-  } catch {
-    /* private mode etc. */
-  }
-}
+import { MAX_TRIES } from "@/lib/leaderboard";
 
 const plural = (n: number) => (n === 1 ? "guess" : "guesses");
 
+export type GuessStatus = "continue" | "won" | "lost" | "quit";
+
 export type GuessResult = {
   lines: string[];
-  /** Game is over — the terminal returns to the normal shell. */
-  done: boolean;
-  /** True only on a winning final guess (terminal unlocks "High Score"). */
-  won: boolean;
+  status: GuessStatus;
+  /** Guesses used (meaningful on "won"/"lost"). */
+  tries: number;
+  /** Wall-clock ms from game start to this result (meaningful on "won"). */
+  timeMs: number;
 };
 
 export class NumberGame {
   private target = Math.floor(Math.random() * 100) + 1;
   private attempts = 0;
+  private start = Date.now();
 
   /** Lines printed when the game starts. */
   intro(): string[] {
-    const best = readBest();
     return [
       "+------------------------------------------+",
       "  NUMBER GUESSING GAME",
@@ -47,56 +33,64 @@ export class NumberGame {
       "  Now it runs in your browser. Full circle.",
       "+------------------------------------------+",
       "I'm thinking of a number between 1 and 100.",
-      best
-        ? `Best run so far: ${best} ${plural(best)}.`
-        : "No best run yet — set the bar.",
+      `You get ${MAX_TRIES} guesses. The clock is running.`,
       "Type a guess, or 'q' to quit.",
     ];
   }
 
   guess(raw: string): GuessResult {
     const input = raw.trim().toLowerCase();
+    const timeMs = Date.now() - this.start;
 
     if (input === "q" || input === "quit" || input === "exit") {
       return {
         lines: [`Bailing out — the number was ${this.target}. No judgment.`],
-        done: true,
-        won: false,
+        status: "quit",
+        tries: this.attempts,
+        timeMs,
       };
     }
 
     const n = Number(input);
     if (!Number.isInteger(n) || n < 1 || n > 100) {
       return {
-        lines: ["That's not a whole number from 1 to 100. Try again."],
-        done: false,
-        won: false,
+        lines: ["That's not a whole number from 1 to 100. (doesn't cost a guess.)"],
+        status: "continue",
+        tries: this.attempts,
+        timeMs,
       };
     }
 
     this.attempts += 1;
+    const left = MAX_TRIES - this.attempts;
 
-    if (n < this.target) {
-      return { lines: [`${n} is too low. Aim higher.`], done: false, won: false };
+    if (n === this.target) {
+      return {
+        lines: [
+          `Got it — ${this.target} in ${this.attempts} ${plural(this.attempts)}!`,
+        ],
+        status: "won",
+        tries: this.attempts,
+        timeMs: Date.now() - this.start,
+      };
     }
-    if (n > this.target) {
-      return { lines: [`${n} is too high. Bring it down.`], done: false, won: false };
+
+    // Wrong guess — did they just burn their last one?
+    if (left <= 0) {
+      return {
+        lines: [`Out of guesses. It was ${this.target}. Streak reset — run it back?`],
+        status: "lost",
+        tries: this.attempts,
+        timeMs,
+      };
     }
 
-    // Correct.
-    const best = readBest();
-    const isRecord = best === null || this.attempts < best;
-    if (isRecord) writeBest(this.attempts);
-
+    const dir = n < this.target ? "too low. Aim higher." : "too high. Bring it down.";
     return {
-      lines: [
-        `Got it — ${this.target} in ${this.attempts} ${plural(this.attempts)}!`,
-        isRecord
-          ? "New best run. High score!"
-          : `Best run still stands at ${best} ${plural(best as number)}.`,
-      ],
-      done: true,
-      won: true,
+      lines: [`${n} is ${dir} (${left} ${plural(left)} left)`],
+      status: "continue",
+      tries: this.attempts,
+      timeMs,
     };
   }
 }

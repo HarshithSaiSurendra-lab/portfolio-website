@@ -18,13 +18,25 @@ import {
   SUDO_HIRE_ME,
   WHOAMI,
 } from "@/data/terminal";
+import {
+  formatDate,
+  formatTime,
+  validateInitials,
+  type Boards,
+  type MainEntry,
+  type StreakEntry,
+} from "@/lib/leaderboard";
+import { loadBoards, submitScore } from "@/components/arcade/leaderboardClient";
 import type { NumberGame } from "./numberGame";
 
 type LineKind = "out" | "cmd" | "sys";
 type Line = { id: number; text: string; kind: LineKind };
+type Mode = "shell" | "game" | "initials";
 
 const PROMPT = "psy@portfolio:~$";
 const GAME_PROMPT = "guess>";
+const INITIALS_PROMPT = "initials>";
+const STREAK_KEY = "psy:guess-streak";
 
 const BANNER: string[] = [
   "psy.terminal v1.0 — booted.",
@@ -46,12 +58,63 @@ const HELP: string[] = [
   "  joke          a programming one-liner",
   "  trophies      achievements unlocked",
   "  play          a hidden game",
+  "  leaderboard   arcade high scores",
   "  sudo hire me  worth a shot",
   "  clear         wipe the screen",
 ];
 
-// Sections a command can summarize + scroll to.
 const SECTION_CMDS = ["about", "experience", "invexs", "projects", "contact"];
+
+function readStreak(): number {
+  try {
+    return Number(localStorage.getItem(STREAK_KEY)) || 0;
+  } catch {
+    return 0;
+  }
+}
+function writeStreak(n: number): void {
+  try {
+    localStorage.setItem(STREAK_KEY, String(n));
+  } catch {
+    /* private mode etc. */
+  }
+}
+
+// Fixed-width board rendering so the columns line up in the mono console.
+function boardLines(boards: Boards, global: boolean): string[] {
+  const out: string[] = [];
+  out.push(global ? "ARCADE HIGH SCORES (global)" : "ARCADE HIGH SCORES (local — global once backend's live)");
+  out.push("fewest guesses, then fastest:");
+  if (boards.main.length === 0) {
+    out.push("  (no scores yet — be the first.)");
+  } else {
+    out.push(
+      ["#".padEnd(3), "NAME".padEnd(5), "TRIES".padEnd(6), "TIME".padEnd(7), "DATE"].join(""),
+    );
+    boards.main.forEach((e: MainEntry, i) => {
+      out.push(
+        [
+          `${i + 1}.`.padEnd(3),
+          e.initials.padEnd(5),
+          String(e.tries).padEnd(6),
+          formatTime(e.timeMs).padEnd(7),
+          formatDate(e.date),
+        ].join(""),
+      );
+    });
+  }
+  out.push("");
+  out.push("longest win streaks:");
+  if (boards.streak.length === 0) {
+    out.push("  (no streaks yet.)");
+  } else {
+    out.push(["#".padEnd(3), "NAME".padEnd(5), "STREAK"].join(""));
+    boards.streak.forEach((e: StreakEntry, i) => {
+      out.push([`${i + 1}.`.padEnd(3), e.initials.padEnd(5), `${e.streak}x`].join(""));
+    });
+  }
+  return out;
+}
 
 export function Terminal({ onClose }: { onClose: () => void }) {
   const router = useRouter();
@@ -61,12 +124,15 @@ export function Terminal({ onClose }: { onClose: () => void }) {
     BANNER.map((text, i) => ({ id: i, text, kind: "sys" as const })),
   );
   const [input, setInput] = useState("");
+  const [mode, setMode] = useState<Mode>("shell");
 
   const idRef = useRef(BANNER.length);
-  const histRef = useRef<string[]>([]); // entered command strings
-  const histIdxRef = useRef<number>(-1); // -1 = current (not browsing)
+  const histRef = useRef<string[]>([]);
+  const histIdxRef = useRef<number>(-1);
   const jokeIdxRef = useRef(0);
   const gameRef = useRef<NumberGame | null>(null);
+  // Win data awaiting initials submission.
+  const pendingRef = useRef<{ tries: number; timeMs: number; streak: number } | null>(null);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,25 +141,20 @@ export function Terminal({ onClose }: { onClose: () => void }) {
     setLines((prev) => [...prev, { id: idRef.current++, text, kind }]);
   }, []);
 
-  const pushMany = useCallback(
-    (texts: string[], kind: LineKind = "out") => {
-      setLines((prev) => {
-        let id = idRef.current;
-        const next = texts.map((text) => ({ id: id++, text, kind }));
-        idRef.current = id;
-        return [...prev, ...next];
-      });
-    },
-    [],
-  );
+  const pushMany = useCallback((texts: string[], kind: LineKind = "out") => {
+    setLines((prev) => {
+      let id = idRef.current;
+      const next = texts.map((text) => ({ id: id++, text, kind }));
+      idRef.current = id;
+      return [...prev, ...next];
+    });
+  }, []);
 
-  // Keep the view pinned to the newest output.
   useEffect(() => {
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [lines]);
 
-  // Autofocus on open; Escape closes.
   useEffect(() => {
     inputRef.current?.focus();
     function onKey(e: globalThis.KeyboardEvent) {
@@ -103,8 +164,6 @@ export function Terminal({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  // Print a section blurb, then scroll there and close the terminal so the
-  // visitor actually lands on the section (the window is an overlay).
   const goToSection = useCallback(
     (id: string) => {
       const summary = SECTION_SUMMARIES[id];
@@ -130,21 +189,26 @@ export function Terminal({ onClose }: { onClose: () => void }) {
   }, [unlock, push]);
 
   const startGame = useCallback(async () => {
+    unlock("arcade-play");
     const { NumberGame } = await import("./numberGame");
     const game = new NumberGame();
     gameRef.current = game;
+    setMode("game");
     pushMany(game.intro());
-  }, [pushMany]);
+  }, [pushMany, unlock]);
+
+  const showLeaderboard = useCallback(async () => {
+    push("Fetching scores …");
+    const res = await loadBoards();
+    pushMany(boardLines(res, res.global));
+  }, [push, pushMany]);
 
   const printTrophies = useCallback(() => {
     push("Trophy cabinet:");
     for (const a of ACHIEVEMENTS) {
       const got = isUnlocked(a.id);
-      if (!got && a.hidden) {
-        push("  [ ] ??? — keep poking around.");
-      } else {
-        push(`  [${got ? "x" : " "}] ${a.title} — ${a.description}`);
-      }
+      if (!got && a.hidden) push("  [ ] ??? — keep poking around.");
+      else push(`  [${got ? "x" : " "}] ${a.title} — ${a.description}`);
     }
   }, [push, isUnlocked]);
 
@@ -174,6 +238,10 @@ export function Terminal({ onClose }: { onClose: () => void }) {
         case "trophies":
           printTrophies();
           return;
+        case "leaderboard":
+        case "scores":
+          void showLeaderboard();
+          return;
         case "resume":
           push("Opening resume.pdf …");
           router.push("/resume");
@@ -187,9 +255,7 @@ export function Terminal({ onClose }: { onClose: () => void }) {
         case "sudo hire me":
           pushMany(SUDO_HIRE_ME);
           window.setTimeout(() => {
-            document
-              .getElementById("contact")
-              ?.scrollIntoView({ behavior: "smooth" });
+            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
             onClose();
           }, 700);
           return;
@@ -208,16 +274,79 @@ export function Terminal({ onClose }: { onClose: () => void }) {
         `'${cmd}' is not recognized. Try 'help'. (this is not real bash, please don't pipe things)`,
       );
     },
-    [
-      pushMany,
-      push,
-      printTrophies,
-      router,
-      toggleTheme,
-      startGame,
-      goToSection,
-      onClose,
-    ],
+    [pushMany, push, printTrophies, showLeaderboard, router, toggleTheme, startGame, goToSection, onClose],
+  );
+
+  // Post a winning run under the entered initials, then show the board.
+  const postScore = useCallback(
+    async (initials: string) => {
+      const pending = pendingRef.current;
+      if (!pending) return;
+      pendingRef.current = null;
+      push("Posting score …");
+      const res = await submitScore({ initials, ...pending });
+      if (res.error) {
+        push(res.error);
+        return;
+      }
+      pushMany(boardLines(res, res.global));
+    },
+    [push, pushMany],
+  );
+
+  const handleGameGuess = useCallback(
+    async (raw: string) => {
+      const game = gameRef.current;
+      if (!game) return;
+      const result = game.guess(raw);
+      pushMany(result.lines);
+
+      if (result.status === "continue") return;
+
+      // Game is over one way or another.
+      gameRef.current = null;
+
+      if (result.status === "won") {
+        unlock("high-score");
+        // Tiered win achievements by guesses used.
+        if (result.tries === 1) unlock("win-in-1");
+        else if (result.tries === 2) unlock("win-in-2");
+        else if (result.tries === 3) unlock("win-in-3");
+        const streak = readStreak() + 1;
+        writeStreak(streak);
+        pendingRef.current = { tries: result.tries, timeMs: result.timeMs, streak };
+        push(`Win streak: ${streak}x.`);
+        push("Enter 3 initials for the leaderboard, or press Enter to skip:");
+        setMode("initials");
+        return;
+      }
+
+      if (result.status === "lost") {
+        writeStreak(0);
+      }
+      // lost or quit → back to the shell.
+      setMode("shell");
+    },
+    [pushMany, push, unlock],
+  );
+
+  const handleInitials = useCallback(
+    async (raw: string) => {
+      if (raw.trim() === "") {
+        push("Skipped — score not posted.");
+        pendingRef.current = null;
+        setMode("shell");
+        return;
+      }
+      const check = validateInitials(raw);
+      if (!check.ok) {
+        push(check.reason);
+        return; // stay in initials mode, ask again
+      }
+      setMode("shell");
+      await postScore(check.value);
+    },
+    [push, postScore],
   );
 
   const handleSubmit = useCallback(
@@ -227,17 +356,16 @@ export function Terminal({ onClose }: { onClose: () => void }) {
       setInput("");
       histIdxRef.current = -1;
 
-      const inGame = gameRef.current !== null;
-      // Echo the entered line under the right prompt.
-      push(`${inGame ? GAME_PROMPT : PROMPT} ${raw}`, "cmd");
+      const label =
+        mode === "game" ? GAME_PROMPT : mode === "initials" ? INITIALS_PROMPT : PROMPT;
+      push(`${label} ${raw}`, "cmd");
 
-      if (inGame) {
-        const result = gameRef.current!.guess(raw);
-        pushMany(result.lines);
-        if (result.done) {
-          gameRef.current = null;
-          if (result.won) unlock("high-score");
-        }
+      if (mode === "game") {
+        void handleGameGuess(raw);
+        return;
+      }
+      if (mode === "initials") {
+        void handleInitials(raw);
         return;
       }
 
@@ -245,13 +373,12 @@ export function Terminal({ onClose }: { onClose: () => void }) {
       histRef.current.push(raw);
       runCommand(raw);
     },
-    [input, push, pushMany, unlock, runCommand],
+    [input, mode, push, handleGameGuess, handleInitials, runCommand],
   );
 
-  // Up/Down arrows recall command history (shell mode only).
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
-      if (gameRef.current) return;
+      if (mode !== "shell") return;
       const hist = histRef.current;
       if (hist.length === 0) return;
 
@@ -276,26 +403,21 @@ export function Terminal({ onClose }: { onClose: () => void }) {
         }
       }
     },
-    [],
+    [mode],
   );
 
-  const inGame = gameRef.current !== null;
+  const promptLabel =
+    mode === "game" ? GAME_PROMPT : mode === "initials" ? INITIALS_PROMPT : PROMPT;
 
   return (
     <div
       className="fixed inset-0 z-[70] flex items-end justify-center p-4 sm:items-center"
       onMouseDown={onClose}
     >
-      {/* Backdrop */}
       <div aria-hidden className="absolute inset-0 bg-ink/40" />
 
-      {/* Stop backdrop-close when interacting with the window itself. */}
-      <div
-        className="relative w-full max-w-2xl"
-        onMouseDown={(e) => e.stopPropagation()}
-      >
+      <div className="relative w-full max-w-2xl" onMouseDown={(e) => e.stopPropagation()}>
         <WindowCard title="terminal — psy.sh" accent="violet">
-          {/* The terminal "screen": classic dark console in either theme. */}
           <div
             ref={scrollRef}
             onClick={() => inputRef.current?.focus()}
@@ -312,14 +434,12 @@ export function Terminal({ onClose }: { onClose: () => void }) {
                       : ""
                 }`}
               >
-                {line.text || " "}
+                {line.text || " "}
               </p>
             ))}
 
             <form onSubmit={handleSubmit} className="mt-1 flex items-center gap-2">
-              <span className="shrink-0 text-[#7ee787]">
-                {inGame ? GAME_PROMPT : PROMPT}
-              </span>
+              <span className="shrink-0 text-[#7ee787]">{promptLabel}</span>
               <input
                 ref={inputRef}
                 value={input}
@@ -329,6 +449,7 @@ export function Terminal({ onClose }: { onClose: () => void }) {
                 autoCapitalize="off"
                 autoCorrect="off"
                 autoComplete="off"
+                maxLength={mode === "initials" ? 3 : undefined}
                 aria-label="Terminal input"
                 className="min-w-0 flex-1 bg-transparent text-[#d7d7e0] caret-[#7ee787] outline-none"
               />

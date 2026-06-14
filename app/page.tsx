@@ -8,8 +8,10 @@ import { Invexs } from "@/components/sections/Invexs";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { QuestLog } from "@/components/sections/QuestLog";
+import { Arcade } from "@/components/arcade/Arcade";
 import { ResumeCTA } from "@/components/sections/ResumeCTA";
 import { Contact } from "@/components/sections/Contact";
+import { VisitorCounter } from "@/components/VisitorCounter";
 import { TICKER_ITEMS } from "@/data/ticker";
 
 export default function Home() {
@@ -30,12 +32,16 @@ export default function Home() {
         <Projects />
         <Skills />
         <QuestLog />
+        <Arcade />
         <ResumeCTA />
         <Contact />
       </main>
 
-      <footer className="border-t-[3px] border-ink px-6 py-8 pb-28 text-center font-mono text-xs text-ink/60">
-        © {new Date().getFullYear()} Sai Surendra · built in Next.js, no templates
+      <footer className="flex flex-col items-center gap-4 border-t-[3px] border-ink px-6 py-8 pb-28 text-center font-mono text-xs text-ink/60">
+        <VisitorCounter />
+        <span>
+          © {new Date().getFullYear()} Sai Surendra · built in Next.js, no templates
+        </span>
       </footer>
 
       <Dock />

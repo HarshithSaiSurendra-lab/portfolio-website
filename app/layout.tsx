@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { bungee, spaceGrotesk, spaceMono } from "./fonts";
 import { InteractiveProvider } from "@/components/interactive/InteractiveProvider";
+import { BootScreen } from "@/components/BootScreen";
 import "./globals.css";
 
 // Inline, render-blocking script: sets the theme class before first paint so
@@ -29,6 +30,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
+        <BootScreen />
         <InteractiveProvider>{children}</InteractiveProvider>
       </body>
     </html>

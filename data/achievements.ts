@@ -9,6 +9,10 @@ export type AchievementId =
   | "hacker-voice"
   | "night-owl"
   | "high-score"
+  | "arcade-play"
+  | "win-in-3"
+  | "win-in-2"
+  | "win-in-1"
   | "konami";
 
 export type Achievement = {
@@ -50,6 +54,29 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "high-score",
     title: "High Score",
     description: "Beat the number-guessing game.",
+  },
+  {
+    id: "arcade-play",
+    title: "Insert Coin",
+    description: "Fired up the number-guessing game. The clock is running.",
+  },
+  {
+    id: "win-in-3",
+    title: "Good Guess",
+    description: "Nailed it in three. You've got a feel for this.",
+    hidden: true,
+  },
+  {
+    id: "win-in-2",
+    title: "Read My Mind",
+    description: "Two guesses. Practically telepathy.",
+    hidden: true,
+  },
+  {
+    id: "win-in-1",
+    title: "Beginner's Luck",
+    description: "First try. One in a hundred. We're not asking questions.",
+    hidden: true,
   },
   {
     id: "konami",

@@ -1,6 +1,7 @@
-import { User, Briefcase, Rocket, Gamepad2, ScrollText, type LucideIcon } from "lucide-react";
-import { NAME_DISPLAY, TAGLINE } from "@/data/profile";
+import { User, Briefcase, Rocket, Gamepad2, ScrollText, Joystick, type LucideIcon } from "lucide-react";
+import { TAGLINE } from "@/data/profile";
 import { HeroTerminalIcon } from "@/components/interactive/HeroTerminalIcon";
+import { HeroName } from "@/components/interactive/HeroName";
 
 // Hero desktop icons are decorative/secondary nav (§4.1) — the Dock is canonical.
 const DESKTOP_ICONS: { label: string; icon: LucideIcon; href: string }[] = [
@@ -9,6 +10,7 @@ const DESKTOP_ICONS: { label: string; icon: LucideIcon; href: string }[] = [
   { label: "invexs.exe", icon: Rocket, href: "#invexs" },
   { label: "my_stuff", icon: Gamepad2, href: "#projects" },
   { label: "quest_log", icon: ScrollText, href: "#quests" },
+  { label: "arcade", icon: Joystick, href: "#arcade" },
 ];
 
 export function Hero() {
@@ -22,9 +24,9 @@ export function Hero() {
           C:\Users\Sai\Desktop&gt; welcome.exe
         </p>
 
-        <h1 className="mt-4 font-display text-5xl leading-[0.95] text-ink sm:text-7xl lg:text-8xl">
-          {NAME_DISPLAY}
-        </h1>
+        <div className="mt-4">
+          <HeroName />
+        </div>
 
         <p className="mt-6 max-w-2xl font-body text-lg text-ink/80 sm:text-xl">
           {TAGLINE}
