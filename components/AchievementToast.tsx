@@ -33,7 +33,7 @@ export function AchievementToast({
         className="grid h-9 w-9 shrink-0 place-items-center border-2 border-ink"
         style={{ backgroundColor: "var(--accent-lime)" }}
       >
-        <Trophy size={18} className="text-ink" />
+        <Trophy size={18} className="text-on-accent" />
       </span>
       <div className="min-w-0 flex-1">
         <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/60">

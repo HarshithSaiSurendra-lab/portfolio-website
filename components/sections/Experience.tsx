@@ -37,7 +37,7 @@ export function Experience() {
                     <span className="text-ink/70">· {job.company}</span>
                     {job.current && (
                       <span
-                        className="ml-2 inline-block border-2 border-ink px-1.5 py-0.5 align-middle font-mono text-[10px] font-bold text-ink"
+                        className="ml-2 inline-block border-2 border-ink px-1.5 py-0.5 align-middle font-mono text-[10px] font-bold text-on-accent"
                         style={{ backgroundColor: "var(--accent-violet)" }}
                       >
                         CURRENT
@@ -46,8 +46,9 @@ export function Experience() {
                   </p>
                   <ul className="mt-2 space-y-1">
                     {job.bullets.map((b) => (
-                      <li key={b} className="font-body text-sm text-ink/80">
-                        — {b}
+                      <li key={b} className="flex gap-2 font-body text-sm text-ink/80">
+                        <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ink/50" />
+                        <span>{b}</span>
                       </li>
                     ))}
                   </ul>

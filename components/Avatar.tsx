@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Accent } from "./WindowCard";
 
 const ACCENT_VAR: Record<Accent, string> = {
-  pink: "var(--accent-pink)",
+  cyan: "var(--accent-cyan)",
   violet: "var(--accent-violet)",
   lime: "var(--accent-lime)",
 };
@@ -11,7 +11,7 @@ const ACCENT_VAR: Record<Accent, string> = {
 // sits on the accent color and matches the site's window/sticker aesthetic.
 // Source asset lives at /public/avatar.png.
 export function Avatar({
-  accent = "pink",
+  accent = "cyan",
   className = "",
 }: {
   accent?: Accent;

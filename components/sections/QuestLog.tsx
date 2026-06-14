@@ -16,7 +16,7 @@ export function QuestLog() {
             {/* Main quest */}
             <div className="border-2 border-ink bg-bg p-4">
               <span
-                className="inline-block border-2 border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink"
+                className="inline-block border-2 border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold text-on-accent"
                 style={{ backgroundColor: "var(--accent-violet)" }}
               >
                 ★ MAIN QUEST

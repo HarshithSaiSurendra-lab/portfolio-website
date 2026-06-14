@@ -10,7 +10,7 @@ const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t
 export const metadata: Metadata = {
   title: "Sai Surendra",
   description:
-    "Portfolio of Harshith Sai Vardhan Reddy Surendra — co-founder & CFO of Invexs AI, incoming MS Econ @ Georgia Tech.",
+    "Portfolio of Harshith Sai Vardhan Reddy Surendra: co-founder & CFO of Invexs AI, incoming MS Econ @ Georgia Tech.",
 };
 
 export default function RootLayout({

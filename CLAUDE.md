@@ -96,8 +96,15 @@ Update the checkboxes as gates are passed. Phase details in spec §11.
       Q8 resolved: avatar = Sai's AI-generated flat-vector portrait (public/avatar.png,
       blue bg knocked out). Q9 resolved: Level 1, ~2 yrs building. Real résumé dates +
       Invexs positioning + private-repo note wired from source docs.
-- [ ] **Phase 4 — Resume & Contact** (HTML /resume + PDF download + View Transition;
-      form + Resend + honeypot) → 🚦 Gate 4: Psy sends real test email
+- [x] **Phase 4 — Resume & Contact** (HTML /resume + PDF download + View Transition;
+      form + Resend + honeypot) → 🚦 Gate 4 — ✅ APPROVED.
+      Real test email confirmed delivered via Resend. Revision batch landed: skills
+      restructured (Excel=MASTER + inline-% bars + curated EQUIPPED chips), proficiency
+      values are DRAFT (Psy verifies near end of project), contact dark-mode contrast +
+      success-screen white-text bug fixed, repo links wired (NexusAI → NexusAI-SMB,
+      EffiPay, Alpha Signal), character card reworked to personality-only stats
+      (+ Anime Knowledge), anime/ shelf folder added, per-folder shelf icons + two-pane
+      explorer layout. Em-dashes removed site-wide (date-range en-dashes kept by Psy's OK).
 - [ ] **Phase 5 — Interactive Layer** (dock wiring, achievement triggers, terminal,
       number-guessing mini-game) → 🚦 Gate 5: terminal/copy approval
 - [ ] **Phase 6 — Polish** (BSOD 404, visitor counter, boot screen, easter egg,

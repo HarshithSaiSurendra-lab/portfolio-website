@@ -1,4 +1,4 @@
-// career.log — chronological timeline (§4.3). SERIOUS copy (§0): real numbers only.
+// career.log chronological timeline (§4.3). SERIOUS copy (§0): real numbers only.
 // Dates + bullets sourced from Sai's résumé (confirmed Gate 3).
 
 export type Job = {
@@ -18,7 +18,7 @@ export const EXPERIENCE: Job[] = [
     location: "Atlanta, GA · Georgia Tech CREATE-X",
     current: true,
     bullets: [
-      "Building an enterprise control plane for autonomous AI agent fleets — real-time monitoring, cost attribution, and governance.",
+      "Building an enterprise control plane for autonomous AI agent fleets: real-time monitoring, cost attribution, and governance.",
       "Modeled unit economics and built 3-statement projections + an investor-ready KPI dashboard for active fundraising.",
       "Led technical product spec (Go/GCP, PostgreSQL, Python SDK, React) and shipped the production landing page in Next.js 14.",
     ],

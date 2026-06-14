@@ -4,7 +4,7 @@ import type { Accent } from "./WindowCard";
 import { CHARACTER, STAT_BARS } from "@/data/stats";
 
 // RPG character sheet that replaces plain skill bars (§4.2).
-export function StatCard({ accent = "pink" }: { accent?: Accent }) {
+export function StatCard({ accent = "cyan" }: { accent?: Accent }) {
   return (
     <div className="border-2 border-ink bg-bg p-4 font-mono">
       <div className="flex items-start gap-4">
@@ -23,7 +23,7 @@ export function StatCard({ accent = "pink" }: { accent?: Accent }) {
           label="XP"
           value={CHARACTER.xpPercent}
           accent={accent}
-          caption="LEVELING UP"
+          caption={`${CHARACTER.xpPercent}% TO LVL ${CHARACTER.level + 1}`}
         />
       </div>
 

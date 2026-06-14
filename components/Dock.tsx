@@ -6,6 +6,7 @@ import {
   Gamepad2,
   Swords,
   ScrollText,
+  MessageSquare,
   FileDown,
   Mail,
   Linkedin,
@@ -19,6 +20,7 @@ type DockItem = {
   icon: LucideIcon;
   href: string;
   external?: boolean;
+  download?: boolean;
 };
 
 // Canonical navigation. Section icons jump to in-page anchors; quick links go to
@@ -31,10 +33,11 @@ const SECTIONS: DockItem[] = [
   { label: "Projects", icon: Gamepad2, href: "#projects" },
   { label: "Skills", icon: Swords, href: "#skills" },
   { label: "Quest Log", icon: ScrollText, href: "#quests" },
+  { label: "Contact", icon: MessageSquare, href: "#contact" },
 ];
 
 const LINKS: DockItem[] = [
-  { label: "Download resume", icon: FileDown, href: "#" },
+  { label: "Download resume", icon: FileDown, href: "/resume.pdf", download: true },
   { label: "Email", icon: Mail, href: `mailto:${PROFILE_LINKS.email}` },
   { label: "LinkedIn", icon: Linkedin, href: PROFILE_LINKS.linkedin, external: true },
   { label: "GitHub", icon: Github, href: PROFILE_LINKS.github, external: true },
@@ -49,7 +52,8 @@ function DockButton({ item }: { item: DockItem }) {
       {...(item.external
         ? { target: "_blank", rel: "noopener noreferrer" }
         : {})}
-      className="group relative grid h-11 w-11 shrink-0 place-items-center border-2 border-ink bg-surface text-ink transition-transform duration-150 hover:-translate-y-1.5 hover:bg-[var(--accent-violet)] focus-visible:-translate-y-1.5 motion-reduce:transform-none motion-reduce:transition-none"
+      {...(item.download ? { download: true } : {})}
+      className="group relative grid h-11 w-11 shrink-0 place-items-center border-2 border-ink bg-surface text-ink transition-transform duration-150 hover:-translate-y-1.5 hover:bg-[var(--accent-violet)] hover:text-on-accent focus-visible:-translate-y-1.5 focus-visible:bg-[var(--accent-violet)] focus-visible:text-on-accent motion-reduce:transform-none motion-reduce:transition-none"
     >
       <Icon size={20} aria-hidden />
       {/* Retro tooltip on hover/focus */}

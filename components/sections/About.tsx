@@ -13,14 +13,14 @@ export function About() {
 
       <div className="mt-8 grid items-start gap-8 lg:grid-cols-2">
         <Reveal>
-          <WindowCard title="about_me.txt" accent="pink">
+          <WindowCard title="about_me.txt" accent="cyan">
             <p className="font-body text-base leading-relaxed text-ink">{BIO}</p>
             <p className="mt-4 font-mono text-xs text-ink/60">{FULL_NAME_FLAVOR}</p>
           </WindowCard>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <StatCard accent="pink" />
+          <StatCard accent="cyan" />
         </Reveal>
       </div>
 

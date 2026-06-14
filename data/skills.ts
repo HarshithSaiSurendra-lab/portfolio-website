@@ -1,7 +1,6 @@
-// skill_tree.exe — equipped skills + active "leveling up" tracks.
-// Equipped = real inventory from Sai's résumé. Leveling-up = current grind.
-// SERIOUS copy (§0): no invented proficiency numbers — leveling bars are
-// honest indeterminate ("LEVELING UP") rather than fake percentages.
+// skill_tree.exe: equipped inventory + proficiency bars.
+// Equipped = real skill inventory from Sai's résumé.
+// PROFICIENCY values are DRAFT (100 reads as "MASTER"); Sai confirms at Gate 4.
 
 export type SkillGroup = {
   id: string;
@@ -11,36 +10,49 @@ export type SkillGroup = {
 
 export const EQUIPPED: SkillGroup[] = [
   {
-    id: "languages",
-    label: "languages/",
-    skills: ["Python", "TypeScript", "JavaScript", "Java", "C++", "SQL", "R"],
-  },
-  {
-    id: "build",
-    label: "build/",
-    skills: ["Next.js", "React", "Tailwind", "Git", "AWS", "Azure", "Tableau", "Power BI"],
+    id: "programming",
+    label: "programming & tools/",
+    skills: [
+      "Python (pandas · NumPy · scikit-learn)",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "SQL",
+      "AWS",
+      "OpenAI API",
+      "Stripe · Plaid API",
+    ],
   },
   {
     id: "finance",
-    label: "finance/",
+    label: "finance & analytics/",
     skills: [
-      "3-Statement Modeling",
       "DCF",
-      "Comparable Company Analysis",
-      "LBO Fundamentals",
-      "Unit Economics",
-      "Due Diligence",
+      "LBO",
+      "M&A",
+      "Financial Modeling",
+      "Econometrics",
       "Portfolio Theory (CAPM · Sharpe · Alpha/Beta)",
+      "Forecasting",
     ],
   },
 ];
 
-// Currently leveling up — rendered as barber-pole "LEVELING UP" bars.
-export const LEVELING_UP: string[] = [
-  "Python",
-  "TypeScript",
-  "Java",
-  "C",
-  "C++",
-  "CSS",
+export type Proficiency = { label: string; value: number };
+
+// Proficiency bars: 100 => "MASTER" badge (no bar); anything below shows a
+// loading bar with the percent printed inside it.
+// VALUES ARE MY ESTIMATE based on Sai's background — he verifies at Gate 4.
+export const PROFICIENCY: Proficiency[] = [
+  { label: "Excel", value: 100 },
+  { label: "HTML & CSS", value: 82 },
+  { label: "Python", value: 80 },
+  { label: "React", value: 80 },
+  { label: "Next.js", value: 80 },
+  { label: "JavaScript", value: 78 },
+  { label: "Tailwind CSS", value: 75 },
+  { label: "SQL", value: 70 },
+  { label: "TypeScript", value: 65 },
+  { label: "R", value: 55 },
+  { label: "C++", value: 30 },
 ];

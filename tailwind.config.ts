@@ -9,9 +9,10 @@ const config: Config = {
         bg: "var(--bg)",
         surface: "var(--surface)",
         ink: "var(--ink)",
-        "accent-pink": "var(--accent-pink)",
+        "accent-cyan": "var(--accent-cyan)",
         "accent-violet": "var(--accent-violet)",
         "accent-lime": "var(--accent-lime)",
+        "on-accent": "var(--on-accent)",
       },
       fontFamily: {
         display: ["var(--font-bungee)", "cursive"],

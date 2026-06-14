@@ -1,5 +1,5 @@
-// my_stuff/ — projects as cartridges/floppies (§4.5). SERIOUS copy (§0).
-// Public repos link out; several builds are private (PRIVATE_NOTE below).
+// my_stuff/ projects as cartridges/floppies (§4.5). SERIOUS copy (§0).
+// Public repos link out; CodeSlayer + Smart Glasses are private (PRIVATE_NOTE below).
 
 export type Project = {
   name: string;
@@ -8,6 +8,7 @@ export type Project = {
   tech?: string;
   period?: string;
   repo?: string;
+  private?: boolean; // true => private repo (lock badge, no link)
   status?: string; // e.g. "IN PROGRESS"
 };
 
@@ -31,10 +32,11 @@ export const PROJECTS: Project[] = [
     highlights: ["Stripe + QuickBooks APIs", "AI copilot", "Payroll + tax automation"],
     period: "Sep 2025 – Present",
     status: "IN PROGRESS",
+    repo: "https://github.com/HarshithSaiSurendra-lab/NexusAI-SMB",
   },
   {
     name: "Alpha Signal",
-    blurb: "Built solo at Hacklytics in 24 hours — with no CS background going in.",
+    blurb: "Built solo at Hacklytics in 24 hours, with no CS background going in.",
     highlights: ["24h hackathon build", "SEC filings pipeline"],
     tech: "TypeScript",
     repo: "https://github.com/HarshithSaiSurendra-lab/hacklytics26",
@@ -45,20 +47,23 @@ export const PROJECTS: Project[] = [
       "A multi-account rewards optimizer using the Plaid API to aggregate transactions and recommend the highest-earning card per spend category.",
     highlights: ["Plaid API", "Rules engine", "Rewards optimization"],
     period: "Oct 2024 – Dec 2024",
+    repo: "https://github.com/HarshithSaiSurendra-lab/effipay",
   },
   {
     name: "CodeSlayer",
-    blurb: "A terminal-based Python learning game — one of my game-building side quests.",
-    highlights: ["Milestones 1–4", "149 passing tests"],
+    blurb: "A terminal-based Python learning game, one of my game-building side quests.",
+    highlights: ["Milestones 1 to 4", "149 passing tests"],
+    private: true,
   },
   {
     name: "Smart Glasses AI Assistant",
     blurb: "A real-time conversation assistant for Meta smart glasses.",
     highlights: ["Concept / in progress", "Phase 1 prototype"],
+    private: true,
     status: "IN PROGRESS",
   },
 ];
 
-// Several repos are private. Surfaced as a note at the foot of the section.
+// Full-width "etc" note at the foot of the section.
 export const PRIVATE_NOTE =
-  "A fair bit lives in private repos — if you want a closer look, DM me and I'll walk you through it.";
+  "A fair bit lives in the private repos. If you want a closer look, DM me and I'll walk you through it.";

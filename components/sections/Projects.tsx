@@ -18,9 +18,9 @@ export function Projects() {
               {/* Cartridge label strip */}
               <div
                 className="flex items-center justify-between gap-2 border-b-[3px] border-ink px-4 py-2"
-                style={{ backgroundColor: "var(--accent-pink)" }}
+                style={{ backgroundColor: "var(--accent-cyan)" }}
               >
-                <h3 className="font-mono text-base font-bold text-ink">{p.name}</h3>
+                <h3 className="font-mono text-base font-bold text-on-accent">{p.name}</h3>
                 {p.status && (
                   <span className="border-2 border-ink bg-surface px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink">
                     {p.status}
@@ -52,7 +52,11 @@ export function Projects() {
                   ))}
                 </ul>
 
-                {p.repo ? (
+                {p.private ? (
+                  <span className="mt-4 inline-flex w-fit items-center gap-2 font-mono text-xs text-ink/50">
+                    <Lock size={14} aria-hidden /> private repo
+                  </span>
+                ) : p.repo ? (
                   <a
                     href={p.repo}
                     target="_blank"
@@ -61,11 +65,7 @@ export function Projects() {
                   >
                     <Github size={16} aria-hidden /> View repo
                   </a>
-                ) : (
-                  <span className="mt-4 inline-flex w-fit items-center gap-2 font-mono text-xs text-ink/50">
-                    <Lock size={14} aria-hidden /> private repo
-                  </span>
-                )}
+                ) : null}
               </div>
             </article>
           </Reveal>
@@ -73,25 +73,33 @@ export function Projects() {
       </div>
 
       <Reveal>
-        <p className="mt-8 flex flex-wrap items-center gap-2 border-2 border-dashed border-ink/40 bg-surface px-4 py-3 font-mono text-sm text-ink/70">
-          <Lock size={15} aria-hidden className="shrink-0" />
-          {PRIVATE_NOTE}
-          <a
-            href={LINKS.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-ink underline underline-offset-4"
+        <article className="mt-6 flex w-full flex-col gap-3 border-[3px] border-ink bg-surface shadow-block">
+          <div
+            className="flex items-center gap-2 border-b-[3px] border-ink px-4 py-2"
+            style={{ backgroundColor: "var(--accent-cyan)" }}
           >
-            LinkedIn
-          </a>
-          <span aria-hidden>·</span>
-          <a
-            href={`mailto:${LINKS.email}`}
-            className="font-bold text-ink underline underline-offset-4"
-          >
-            email
-          </a>
-        </p>
+            <Lock size={15} aria-hidden className="shrink-0 text-on-accent" />
+            <h3 className="font-mono text-base font-bold text-on-accent">etc/</h3>
+          </div>
+          <p className="flex flex-wrap items-center gap-2 px-4 pb-4 font-mono text-sm text-ink/75">
+            {PRIVATE_NOTE}
+            <a
+              href={LINKS.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-ink underline underline-offset-4"
+            >
+              LinkedIn
+            </a>
+            <span aria-hidden>·</span>
+            <a
+              href={`mailto:${LINKS.email}`}
+              className="font-bold text-ink underline underline-offset-4"
+            >
+              email
+            </a>
+          </p>
+        </article>
       </Reveal>
     </section>
   );

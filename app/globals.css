@@ -7,9 +7,13 @@
   --bg: #ede9f7; /* Lavender */
   --surface: #ffffff; /* White (windows) */
   --ink: #16161f; /* Text / borders */
-  --accent-pink: #ff3ec9;
+  --accent-cyan: #16d6e6; /* electric Y2K cyan */
   --accent-violet: #7c5cff;
   --accent-lime: #c6ff3e;
+  /* Text/icons that sit ON an accent fill. Fixed dark ink in BOTH themes —
+     all three accents are bright, so dark text stays legible everywhere.
+     This is what keeps cyan/lime buttons readable in dark mode. */
+  --on-accent: #16161f;
 }
 
 /* ── Theme tokens — dark palette ("nighttime.sav") ──────────────────────── */
@@ -17,9 +21,10 @@
   --bg: #16161f; /* Deep ink */
   --surface: #211f2e; /* Dark surface (windows) */
   --ink: #f0edf8; /* Off-white */
-  --accent-pink: #ff5ed4; /* slightly lifted */
+  --accent-cyan: #45e8f5; /* slightly lifted */
   --accent-violet: #9d85ff;
   --accent-lime: #d4ff66;
+  /* --on-accent intentionally NOT overridden: stays dark on bright accents. */
 }
 
 html {
@@ -64,20 +69,26 @@ body {
   animation-play-state: paused;
 }
 
-/* ── Indeterminate LoadingBar ("LEVELING UP" / unknown progress) ────────── */
-/* A barber-pole: diagonal stripes that drift. Falls back to static stripes
-   (still meaningful) under reduced motion. */
-@keyframes bar-barberpole {
+/* ── Indeterminate LoadingBar (unknown progress) ────────────────────────── */
+/* Diagonal stripes that drift. Animated via transform: translateX on an
+   oversized stripe layer (GPU-composited, no per-frame repaint) — this is the
+   fix for the visible stutter the background-position version caused. The layer
+   is wider than its track and slides exactly one stripe period, so it loops
+   seamlessly with no snap. The 45° stripe has a 14px period along its axis,
+   which projects to 14·√2 ≈ 19.799px horizontally — translating by that exact
+   amount is what removes the stutter. Static under reduced motion. */
+@keyframes bar-stripe-slide {
   from {
-    background-position: 0 0;
+    transform: translateX(0);
   }
   to {
-    background-position: 28px 0;
+    transform: translateX(-19.79899px);
   }
 }
 
-.bar-barberpole {
-  animation: bar-barberpole 0.7s linear infinite;
+.bar-stripe {
+  animation: bar-stripe-slide 0.8s linear infinite;
+  will-change: transform;
 }
 
 /* ── Achievement toast entrance (pure CSS — Framer Motion reserved for
@@ -121,6 +132,13 @@ body {
   }
 }
 
+/* ── View Transitions for / <-> /resume (progressive enhancement) ─────────── */
+/* Cross-document MPA transition: supported browsers cross-fade between the two
+   pages; everything else hard-cuts. No JS, no library. */
+@view-transition {
+  navigation: auto;
+}
+
 /* Dock/anchor offset so smooth-scroll targets aren't jammed to the top edge. */
 section[id] {
   scroll-margin-top: 1.5rem;
@@ -129,7 +147,7 @@ section[id] {
 /* ── Global reduced-motion guard ────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .ticker-track,
-  .bar-barberpole,
+  .bar-stripe,
   .toast-in {
     animation: none !important;
     transform: none !important;

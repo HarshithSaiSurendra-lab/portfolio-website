@@ -1,4 +1,4 @@
-// "Things I'm into" shelf — desktop folders that open small windows (§4.2).
+// "Things I'm into" shelf: desktop folders that open small windows (§4.2).
 // Humanizes; gives professors/PhD contacts a hook. [confirm] items at Gate 3.
 
 export type ShelfFolder = {
@@ -14,9 +14,9 @@ export const SHELF: ShelfFolder[] = [
     label: "books/",
     blurb: "What's on the desk right now.",
     items: [
-      "Understanding Analysis — Stephen Abbott",
-      "Atomic Habits — James Clear",
-      "The Art of War — Sun Tzu",
+      "Understanding Analysis · Stephen Abbott",
+      "Atomic Habits · James Clear",
+      "The Art of War · Sun Tzu",
     ],
   },
   {
@@ -24,8 +24,8 @@ export const SHELF: ShelfFolder[] = [
     label: "learning/",
     blurb: "Active self-study tracks.",
     items: [
-      "Karpathy — Neural Networks: Zero to Hero",
-      "Stanford CS224n — NLP with Deep Learning",
+      "Karpathy · Neural Networks: Zero to Hero",
+      "Stanford CS224n · NLP with Deep Learning",
     ],
   },
   {
@@ -36,6 +36,21 @@ export const SHELF: ShelfFolder[] = [
       "6-indicator volume-flow system",
       "QuantConnect backtesting",
       "Market microstructure curiosity",
+    ],
+  },
+  {
+    id: "anime",
+    label: "anime/",
+    blurb: "Currently in the rotation.",
+    items: [
+      "Hunter x Hunter",
+      "One Piece",
+      "Naruto",
+      "Fate series",
+      "Attack on Titan",
+      "Jujutsu Kaisen",
+      "Now watching: Frieren · Witch Hat Atelier",
+      "List's too long to fit. DM me for the rest!",
     ],
   },
 ];

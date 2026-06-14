@@ -13,9 +13,9 @@ import { AchievementToast } from "@/components/AchievementToast";
 const TICKER_ITEMS = [
   "SAI/USD ▲ +∞%",
   "BUILDING INVEXS AI",
-  "GT MS ECON — FALL '26",
+  "GT MS ECON · FALL '26",
   "CURRENTLY DEBUGGING SOMETHING",
-  "2ND PLACE — AI ATL HACKATHON",
+  "2ND PLACE · AI ATL HACKATHON",
   "STILL CONFUSED ABOUT REAL ANALYSIS PROOFS",
   "6-INDICATOR TRADING SYSTEM: ONLINE",
 ];
@@ -46,7 +46,7 @@ export default function PlaygroundPage() {
       <header className="mx-auto flex max-w-6xl flex-wrap items-start justify-between gap-4 px-6 pt-8">
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
-            phase 2 · gate 2 — component playground
+            phase 2 · gate 2 · component playground
           </p>
           <h1 className="font-display text-2xl leading-tight text-ink sm:text-4xl">
             COMPONENTS.EXE
@@ -72,27 +72,27 @@ export default function PlaygroundPage() {
         </p>
 
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
-          <WindowCard title="about_me.txt" accent="pink">
+          <WindowCard title="about_me.txt" accent="cyan">
             <p className="text-base">
               Every section of the site is wrapped in this retro window chrome:
               colored title bar, traffic lights, mono filename, chunky ink border,
-              hard offset block shadow — no blur, same feel in both themes.
+              hard offset block shadow, no blur, same feel in both themes.
             </p>
             <p className="mt-3 text-sm text-ink/70">
-              (Sample text — real copy is approved at Gate 3.)
+              (Sample text; real copy is approved at Gate 3.)
             </p>
           </WindowCard>
 
           <WindowCard title="stats.sys" accent="violet">
             <div className="space-y-4">
-              <LoadingBar label="Excel Wizardry" value={100} accent="violet" />
-              <LoadingBar label="Spreadsheet Modeling" value={90} accent="violet" />
-              <LoadingBar label="Python" accent="violet" caption="LEVELING UP" />
-              <LoadingBar label="Coffee Dependency" value={95} accent="violet" />
+              <LoadingBar label="Tabs Open Right Now" value={99} accent="violet" />
+              <LoadingBar label="Shipping Velocity" value={88} accent="violet" />
+              <LoadingBar label="Side-Quest Completion" value={60} accent="violet" />
+              <LoadingBar label="Caffeine Reserves" value={95} accent="violet" />
               <LoadingBar label="Sleep Schedule" value={15} accent="violet" />
             </div>
             <p className="mt-3 font-mono text-xs text-ink/60">
-              LoadingBar — determinate + indeterminate (draft values).
+              LoadingBar: determinate + indeterminate (draft values).
             </p>
           </WindowCard>
 
@@ -101,7 +101,7 @@ export default function PlaygroundPage() {
               <li>Drag me by the title bar (desktop).</li>
               <li>Double-click the title bar to reset.</li>
               <li>Red light minimizes / restores.</li>
-              <li>Tab through everything — focus rings are visible.</li>
+              <li>Tab through everything; focus rings are visible.</li>
             </ul>
           </WindowCard>
         </div>
@@ -112,7 +112,7 @@ export default function PlaygroundPage() {
         <div className="border-[3px] border-ink bg-surface p-5 shadow-block">
           <h2 className="font-display text-lg text-ink">ACHIEVEMENT TOAST</h2>
           <p className="mt-1 font-body text-sm text-ink/70">
-            Shell only — no real triggers yet (those arrive in Phase 5). Click to
+            Shell only, no real triggers yet (those arrive in Phase 5). Click to
             preview the notification; it auto-dismisses, or close it manually.
           </p>
           <button

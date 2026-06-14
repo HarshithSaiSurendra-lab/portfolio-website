@@ -1,7 +1,7 @@
 import { WindowCard } from "@/components/WindowCard";
 import { LoadingBar } from "@/components/LoadingBar";
 import { Reveal } from "@/components/Reveal";
-import { EQUIPPED, LEVELING_UP } from "@/data/skills";
+import { EQUIPPED, PROFICIENCY } from "@/data/skills";
 
 export function Skills() {
   return (
@@ -14,7 +14,7 @@ export function Skills() {
       <Reveal>
         <WindowCard title="skill_tree.exe" accent="lime">
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Equipped — the inventory */}
+            {/* Equipped: the inventory */}
             <div>
               <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink/60">
                 Equipped
@@ -38,17 +38,39 @@ export function Skills() {
               </div>
             </div>
 
-            {/* Leveling up — the active grind */}
+            {/* Proficiency: 100 = MASTER badge, below 100 = bar with inline % */}
             <div className="border-t-2 border-ink pt-6 lg:border-l-2 lg:border-t-0 lg:pl-8 lg:pt-0">
               <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink/60">
-                Currently leveling up
+                Proficiency
               </p>
               <ul className="space-y-4">
-                {LEVELING_UP.map((skill) => (
-                  <li key={skill}>
-                    <LoadingBar label={skill} caption="LEVELING UP" accent="lime" />
-                  </li>
-                ))}
+                {PROFICIENCY.map((skill) =>
+                  skill.value >= 100 ? (
+                    <li
+                      key={skill.label}
+                      className="flex items-center justify-between gap-2"
+                    >
+                      <span className="font-mono text-xs font-bold uppercase tracking-wide text-ink">
+                        {skill.label}
+                      </span>
+                      <span
+                        className="border-2 border-ink px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-on-accent"
+                        style={{ backgroundColor: "var(--accent-lime)" }}
+                      >
+                        ★ Master
+                      </span>
+                    </li>
+                  ) : (
+                    <li key={skill.label}>
+                      <LoadingBar
+                        label={skill.label}
+                        value={skill.value}
+                        accent="lime"
+                        inlineValue
+                      />
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
           </div>

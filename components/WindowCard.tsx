@@ -4,10 +4,10 @@ import { type ReactNode, useState } from "react";
 import { motion, useMotionValue, useDragControls, animate } from "framer-motion";
 import { useIsDesktop } from "./hooks/useIsDesktop";
 
-export type Accent = "pink" | "violet" | "lime";
+export type Accent = "cyan" | "violet" | "lime";
 
 const ACCENT_VAR: Record<Accent, string> = {
-  pink: "var(--accent-pink)",
+  cyan: "var(--accent-cyan)",
   violet: "var(--accent-violet)",
   lime: "var(--accent-lime)",
 };
@@ -76,7 +76,7 @@ export function WindowCard({
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => setMinimized((m) => !m)}
             aria-label={minimized ? `Restore ${title}` : `Minimize ${title}`}
-            className="grid h-3.5 w-3.5 place-items-center rounded-full border-2 border-ink bg-[#FF5F57] text-[9px] font-bold leading-none text-transparent hover:text-ink"
+            className="grid h-3.5 w-3.5 place-items-center rounded-full border-2 border-ink bg-[#FF5F57] text-[9px] font-bold leading-none text-transparent hover:text-on-accent"
           >
             {minimized ? "+" : "–"}
           </button>
@@ -84,7 +84,7 @@ export function WindowCard({
           <span aria-hidden className="h-3.5 w-3.5 rounded-full border-2 border-ink bg-[#28C840]" />
         </div>
 
-        <p className="pointer-events-none truncate font-mono text-sm font-bold text-ink">
+        <p className="pointer-events-none truncate font-mono text-sm font-bold text-on-accent">
           {title}
         </p>
 
