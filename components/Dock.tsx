@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Home,
   User,
@@ -11,16 +13,19 @@ import {
   Mail,
   Linkedin,
   Github,
+  TerminalSquare,
   type LucideIcon,
 } from "lucide-react";
 import { LINKS as PROFILE_LINKS } from "@/data/profile";
+import { useInteractive } from "@/components/interactive/InteractiveProvider";
 
 type DockItem = {
   label: string;
   icon: LucideIcon;
-  href: string;
+  href?: string;
   external?: boolean;
   download?: boolean;
+  onClick?: () => void;
 };
 
 // Canonical navigation. Section icons jump to in-page anchors; quick links go to
@@ -36,35 +41,70 @@ const SECTIONS: DockItem[] = [
   { label: "Contact", icon: MessageSquare, href: "#contact" },
 ];
 
-const LINKS: DockItem[] = [
-  { label: "Download resume", icon: FileDown, href: "/resume.pdf", download: true },
-  { label: "Email", icon: Mail, href: `mailto:${PROFILE_LINKS.email}` },
-  { label: "LinkedIn", icon: Linkedin, href: PROFILE_LINKS.linkedin, external: true },
-  { label: "GitHub", icon: Github, href: PROFILE_LINKS.github, external: true },
-];
+
+const BUTTON_CLASS =
+  "group relative grid h-11 w-11 shrink-0 place-items-center border-2 border-ink bg-surface text-ink transition-transform duration-150 hover:-translate-y-1.5 hover:bg-[var(--accent-violet)] hover:text-on-accent focus-visible:-translate-y-1.5 focus-visible:bg-[var(--accent-violet)] focus-visible:text-on-accent motion-reduce:transform-none motion-reduce:transition-none";
+
+function Tooltip({ label }: { label: string }) {
+  return (
+    <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap border-2 border-ink bg-surface px-2 py-0.5 font-mono text-xs text-ink opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+      {label}
+    </span>
+  );
+}
 
 function DockButton({ item }: { item: DockItem }) {
   const Icon = item.icon;
+
+  // Action items (terminal) render as a real <button>.
+  if (item.onClick && !item.href) {
+    return (
+      <button
+        type="button"
+        onClick={item.onClick}
+        aria-label={item.label}
+        className={BUTTON_CLASS}
+      >
+        <Icon size={20} aria-hidden />
+        <Tooltip label={item.label} />
+      </button>
+    );
+  }
+
   return (
     <a
       href={item.href}
       aria-label={item.label}
+      onClick={item.onClick}
       {...(item.external
         ? { target: "_blank", rel: "noopener noreferrer" }
         : {})}
       {...(item.download ? { download: true } : {})}
-      className="group relative grid h-11 w-11 shrink-0 place-items-center border-2 border-ink bg-surface text-ink transition-transform duration-150 hover:-translate-y-1.5 hover:bg-[var(--accent-violet)] hover:text-on-accent focus-visible:-translate-y-1.5 focus-visible:bg-[var(--accent-violet)] focus-visible:text-on-accent motion-reduce:transform-none motion-reduce:transition-none"
+      className={BUTTON_CLASS}
     >
       <Icon size={20} aria-hidden />
-      {/* Retro tooltip on hover/focus */}
-      <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap border-2 border-ink bg-surface px-2 py-0.5 font-mono text-xs text-ink opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-        {item.label}
-      </span>
+      <Tooltip label={item.label} />
     </a>
   );
 }
 
 export function Dock() {
+  const { openTerminal, notifyResumeDownload } = useInteractive();
+
+  const links: DockItem[] = [
+    {
+      label: "Download resume",
+      icon: FileDown,
+      href: "/resume.pdf",
+      download: true,
+      onClick: notifyResumeDownload,
+    },
+    { label: "Email", icon: Mail, href: `mailto:${PROFILE_LINKS.email}` },
+    { label: "LinkedIn", icon: Linkedin, href: PROFILE_LINKS.linkedin, external: true },
+    { label: "GitHub", icon: Github, href: PROFILE_LINKS.github, external: true },
+    { label: "Terminal", icon: TerminalSquare, onClick: openTerminal },
+  ];
+
   return (
     <nav
       aria-label="Primary"
@@ -75,7 +115,7 @@ export function Dock() {
           <DockButton key={item.label} item={item} />
         ))}
         <span aria-hidden className="mx-1 h-8 w-0.5 shrink-0 bg-ink/30" />
-        {LINKS.map((item) => (
+        {links.map((item) => (
           <DockButton key={item.label} item={item} />
         ))}
       </div>

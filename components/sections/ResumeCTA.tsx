@@ -1,6 +1,7 @@
-import { FileText, Download, ArrowRight } from "lucide-react";
+import { FileText, ArrowRight } from "lucide-react";
 import { WindowCard } from "@/components/WindowCard";
 import { Reveal } from "@/components/Reveal";
+import { ResumePdfButton } from "@/components/interactive/ResumePdfButton";
 
 // CTA card styled as a desktop file icon (§4.7). The HTML résumé lives at
 // /resume; a direct PDF download sits alongside. Plain <a> to /resume so the
@@ -42,13 +43,7 @@ export function ResumeCTA() {
                 >
                   View résumé <ArrowRight size={15} aria-hidden />
                 </a>
-                <a
-                  href="/resume.pdf"
-                  download
-                  className="inline-flex items-center gap-2 border-2 border-ink bg-surface px-4 py-2 font-mono text-sm font-bold text-ink shadow-[3px_3px_0_0_var(--ink)] transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
-                >
-                  <Download size={15} aria-hidden /> PDF
-                </a>
+                <ResumePdfButton />
               </div>
             </div>
           </WindowCard>

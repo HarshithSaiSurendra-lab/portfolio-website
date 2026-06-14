@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { useInteractive } from "@/components/interactive/InteractiveProvider";
 
 type Theme = "light" | "dark";
 
@@ -10,6 +11,7 @@ type Theme = "light" | "dark";
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
+  const { unlock } = useInteractive();
 
   useEffect(() => {
     setTheme(
@@ -26,6 +28,7 @@ export function ThemeToggle() {
     } catch {
       /* ignore — private mode etc. */
     }
+    if (next === "dark") unlock("night-owl");
     setTheme(next);
   }
 

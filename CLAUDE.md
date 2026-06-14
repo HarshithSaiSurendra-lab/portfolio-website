@@ -105,10 +105,17 @@ Update the checkboxes as gates are passed. Phase details in spec §11.
       EffiPay, Alpha Signal), character card reworked to personality-only stats
       (+ Anime Knowledge), anime/ shelf folder added, per-folder shelf icons + two-pane
       explorer layout. Em-dashes removed site-wide (date-range en-dashes kept by Psy's OK).
-- [ ] **Phase 5 — Interactive Layer** (dock wiring, achievement triggers, terminal,
-      number-guessing mini-game) → 🚦 Gate 5: terminal/copy approval
+- [x] **Phase 5 — Interactive Layer** (dock wiring, achievement triggers, terminal,
+      number-guessing mini-game) → 🚦 Gate 5 — ✅ APPROVED.
+      Terminal (hero + dock launch), lazy mini-game, and all six live achievement
+      triggers (Hello World/Tourist/Speedrun/Hacker Voice/Night Owl/High Score)
+      verified in both themes; Konami stays for Phase 6. Draft terminal/joke/achievement
+      copy approved as-is (Psy may still tweak individual lines later).
 - [ ] **Phase 6 — Polish** (BSOD 404, visitor counter, boot screen, easter egg,
-      CRT toggle, save-slot picker) → 🚦 Gate 6: easter egg + boot review
+      CRT toggle, save-slot picker) → 🚦 Gate 6: easter egg + boot review.
+      ADDED SCOPE: global number-game leaderboards on the shared Upstash/KV store —
+      (1) main board ranked by fewest tries then fastest time, showing name · tries
+      (time) · date; (2) separate win-streak board. Needs Upstash env vars (Psy).
 - [ ] **Phase 7 — QA & Launch** (responsive/a11y/reduced-motion pass, Android test,
       OG image, analytics, Lighthouse, deploy) → 🚦 Gate 7: final walkthrough
 

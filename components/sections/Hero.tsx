@@ -1,5 +1,6 @@
-import { User, Briefcase, Rocket, Gamepad2, ScrollText, TerminalSquare, type LucideIcon } from "lucide-react";
+import { User, Briefcase, Rocket, Gamepad2, ScrollText, type LucideIcon } from "lucide-react";
 import { NAME_DISPLAY, TAGLINE } from "@/data/profile";
+import { HeroTerminalIcon } from "@/components/interactive/HeroTerminalIcon";
 
 // Hero desktop icons are decorative/secondary nav (§4.1) — the Dock is canonical.
 const DESKTOP_ICONS: { label: string; icon: LucideIcon; href: string }[] = [
@@ -44,18 +45,8 @@ export function Hero() {
               </a>
             </li>
           ))}
-          {/* Terminal desktop icon — wired up in Phase 5 (§5). */}
-          <li>
-            <span
-              className="flex w-20 cursor-default flex-col items-center gap-2 text-center opacity-60"
-              title="Terminal boots in Phase 5"
-            >
-              <span className="grid h-14 w-14 place-items-center border-2 border-dashed border-ink bg-surface text-ink">
-                <TerminalSquare size={24} aria-hidden />
-              </span>
-              <span className="font-mono text-[11px] text-ink/80">terminal</span>
-            </span>
-          </li>
+          {/* Terminal desktop icon — opens the interactive terminal (§5). */}
+          <HeroTerminalIcon />
         </ul>
       </div>
     </section>

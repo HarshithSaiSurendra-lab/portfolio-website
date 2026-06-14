@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { bungee, spaceGrotesk, spaceMono } from "./fonts";
+import { InteractiveProvider } from "@/components/interactive/InteractiveProvider";
 import "./globals.css";
 
 // Inline, render-blocking script: sets the theme class before first paint so
@@ -27,7 +28,9 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <InteractiveProvider>{children}</InteractiveProvider>
+      </body>
     </html>
   );
 }
