@@ -4,46 +4,51 @@ import {
   Briefcase,
   Rocket,
   Gamepad2,
+  Swords,
   ScrollText,
-  TerminalSquare,
   FileDown,
   Mail,
   Linkedin,
   Github,
   type LucideIcon,
 } from "lucide-react";
+import { LINKS as PROFILE_LINKS } from "@/data/profile";
 
 type DockItem = {
   label: string;
   icon: LucideIcon;
-  href?: string; // real wiring (smooth-scroll / quick links) lands in Phase 5
+  href: string;
+  external?: boolean;
 };
 
-// Canonical navigation. Section icons + quick links. Hrefs are placeholders for
-// now — confirmed links + smooth-scroll wiring come in Phase 5 (§6.1).
+// Canonical navigation. Section icons jump to in-page anchors; quick links go to
+// confirmed destinations. (Resume button waits on the /resume page — Phase 4.)
 const SECTIONS: DockItem[] = [
-  { label: "Home", icon: Home, href: "#" },
-  { label: "About", icon: User, href: "#" },
-  { label: "Experience", icon: Briefcase, href: "#" },
-  { label: "Invexs AI", icon: Rocket, href: "#" },
-  { label: "Projects", icon: Gamepad2, href: "#" },
-  { label: "Quest Log", icon: ScrollText, href: "#" },
-  { label: "Terminal", icon: TerminalSquare, href: "#" },
+  { label: "Home", icon: Home, href: "#home" },
+  { label: "About", icon: User, href: "#about" },
+  { label: "Experience", icon: Briefcase, href: "#experience" },
+  { label: "Invexs AI", icon: Rocket, href: "#invexs" },
+  { label: "Projects", icon: Gamepad2, href: "#projects" },
+  { label: "Skills", icon: Swords, href: "#skills" },
+  { label: "Quest Log", icon: ScrollText, href: "#quests" },
 ];
 
 const LINKS: DockItem[] = [
   { label: "Download resume", icon: FileDown, href: "#" },
-  { label: "Email", icon: Mail, href: "#" },
-  { label: "LinkedIn", icon: Linkedin, href: "#" },
-  { label: "GitHub", icon: Github, href: "#" },
+  { label: "Email", icon: Mail, href: `mailto:${PROFILE_LINKS.email}` },
+  { label: "LinkedIn", icon: Linkedin, href: PROFILE_LINKS.linkedin, external: true },
+  { label: "GitHub", icon: Github, href: PROFILE_LINKS.github, external: true },
 ];
 
 function DockButton({ item }: { item: DockItem }) {
   const Icon = item.icon;
   return (
     <a
-      href={item.href ?? "#"}
+      href={item.href}
       aria-label={item.label}
+      {...(item.external
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : {})}
       className="group relative grid h-11 w-11 shrink-0 place-items-center border-2 border-ink bg-surface text-ink transition-transform duration-150 hover:-translate-y-1.5 hover:bg-[var(--accent-violet)] focus-visible:-translate-y-1.5 motion-reduce:transform-none motion-reduce:transition-none"
     >
       <Icon size={20} aria-hidden />

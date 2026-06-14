@@ -1,0 +1,10 @@
+// Ticker tape content (chrome — playful per §0). DRAFT until Gate 3.
+export const TICKER_ITEMS: string[] = [
+  "SAI/USD ▲ +∞%",
+  "BUILDING INVEXS AI",
+  "GT MS ECON — FALL '26",
+  "CURRENTLY DEBUGGING SOMETHING",
+  "2ND PLACE — AI ATL HACKATHON",
+  "STILL CONFUSED ABOUT REAL ANALYSIS PROOFS",
+  "6-INDICATOR TRADING SYSTEM: ONLINE",
+];

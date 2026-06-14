@@ -91,8 +91,11 @@ Update the checkboxes as gates are passed. Phase details in spec §11.
       basic toggle) → 🚦 Gate 1: token/typography demo page — ✅ APPROVED
 - [x] **Phase 2 — Core Components** (WindowCard+drag, Ticker, Dock, LoadingBar,
       AchievementToast shell) → 🚦 Gate 2: component playground — ✅ APPROVED
-- [ ] **Phase 3 — Main Page Sections** (hero, about+stat card+shelf, experience,
-      Invexs, projects, quest log) → 🚦 Gate 3: FULL copy review. Blocked by Q8, Q9.
+- [x] **Phase 3 — Main Page Sections** (hero, about+stat card+shelf, experience,
+      Invexs, projects, SKILLS, quest log) → 🚦 Gate 3 — ✅ APPROVED.
+      Q8 resolved: avatar = Sai's AI-generated flat-vector portrait (public/avatar.png,
+      blue bg knocked out). Q9 resolved: Level 1, ~2 yrs building. Real résumé dates +
+      Invexs positioning + private-repo note wired from source docs.
 - [ ] **Phase 4 — Resume & Contact** (HTML /resume + PDF download + View Transition;
       form + Resend + honeypot) → 🚦 Gate 4: Psy sends real test email
 - [ ] **Phase 5 — Interactive Layer** (dock wiring, achievement triggers, terminal,

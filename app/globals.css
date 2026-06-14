@@ -97,6 +97,35 @@ body {
   animation: toast-in 0.28s ease-out both;
 }
 
+/* ── Hero CRT scanline / dither overlay (CSS-only, very low opacity) ─────── */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--ink) 0,
+    var(--ink) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.05;
+  z-index: 1;
+}
+
+/* Smooth in-page scrolling, disabled under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Dock/anchor offset so smooth-scroll targets aren't jammed to the top edge. */
+section[id] {
+  scroll-margin-top: 1.5rem;
+}
+
 /* ── Global reduced-motion guard ────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .ticker-track,
