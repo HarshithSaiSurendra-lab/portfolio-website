@@ -44,7 +44,7 @@ export class NumberGame {
 
     if (input === "q" || input === "quit" || input === "exit") {
       return {
-        lines: [`Bailing out — the number was ${this.target}. No judgment.`],
+        lines: [`Bailing out. The number was ${this.target}. No judgment.`],
         status: "quit",
         tries: this.attempts,
         timeMs,
@@ -67,7 +67,7 @@ export class NumberGame {
     if (n === this.target) {
       return {
         lines: [
-          `Got it — ${this.target} in ${this.attempts} ${plural(this.attempts)}!`,
+          `Got it. ${this.target} in ${this.attempts} ${plural(this.attempts)}!`,
         ],
         status: "won",
         tries: this.attempts,
@@ -78,7 +78,7 @@ export class NumberGame {
     // Wrong guess — did they just burn their last one?
     if (left <= 0) {
       return {
-        lines: [`Out of guesses. It was ${this.target}. Streak reset — run it back?`],
+        lines: [`Out of guesses. It was ${this.target}. Streak reset. Run it back?`],
         status: "lost",
         tries: this.attempts,
         timeMs,

@@ -46,7 +46,7 @@ export function Arcade() {
       <Reveal>
         <h2 className="font-display text-3xl text-ink sm:text-4xl">ARCADE</h2>
         <p className="mt-3 max-w-2xl font-body text-ink/70">
-          The number-guessing game — the first thing I built in Python — keeps a
+          The number-guessing game (the first thing I built in Python) keeps a
           high-score table. Crack it in the fewest guesses (and fastest), or chain
           wins for the streak board.
         </p>
@@ -63,7 +63,7 @@ export function Arcade() {
                 </h3>
                 {boards.main.length === 0 ? (
                   <p className="font-mono text-sm text-ink/60">
-                    {loaded ? "No scores yet — be the first." : "Loading …"}
+                    {loaded ? "No scores yet. Be the first." : "Loading …"}
                   </p>
                 ) : (
                   <table className="w-full border-collapse font-mono text-sm">
@@ -127,7 +127,7 @@ export function Arcade() {
               <p className="font-mono text-[11px] text-ink/50">
                 {global
                   ? "Live global board."
-                  : "Local scores for now — goes global once the backend is connected."}
+                  : "Local scores for now. Goes global once the backend is connected."}
               </p>
               <button
                 type="button"

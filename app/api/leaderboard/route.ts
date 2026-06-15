@@ -93,7 +93,7 @@ export async function POST(req: Request) {
     "unknown";
   if (rateLimited(ip)) {
     return NextResponse.json(
-      { error: "Slow down — too many scores too fast." },
+      { error: "Slow down, too many scores too fast." },
       { status: 429 },
     );
   }

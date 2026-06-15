@@ -39,7 +39,7 @@ const INITIALS_PROMPT = "initials>";
 const STREAK_KEY = "psy:guess-streak";
 
 const BANNER: string[] = [
-  "psy.terminal v1.0 — booted.",
+  "psy.terminal v1.0 booted.",
   "Type 'help' for the command list. (this is not real bash, be gentle.)",
 ];
 
@@ -83,10 +83,10 @@ function writeStreak(n: number): void {
 // Fixed-width board rendering so the columns line up in the mono console.
 function boardLines(boards: Boards, global: boolean): string[] {
   const out: string[] = [];
-  out.push(global ? "ARCADE HIGH SCORES (global)" : "ARCADE HIGH SCORES (local — global once backend's live)");
+  out.push(global ? "ARCADE HIGH SCORES (global)" : "ARCADE HIGH SCORES (local · global once backend's live)");
   out.push("fewest guesses, then fastest:");
   if (boards.main.length === 0) {
-    out.push("  (no scores yet — be the first.)");
+    out.push("  (no scores yet, be the first.)");
   } else {
     out.push(
       ["#".padEnd(3), "NAME".padEnd(5), "TRIES".padEnd(6), "TIME".padEnd(7), "DATE"].join(""),
@@ -207,8 +207,8 @@ export function Terminal({ onClose }: { onClose: () => void }) {
     push("Trophy cabinet:");
     for (const a of ACHIEVEMENTS) {
       const got = isUnlocked(a.id);
-      if (!got && a.hidden) push("  [ ] ??? — keep poking around.");
-      else push(`  [${got ? "x" : " "}] ${a.title} — ${a.description}`);
+      if (!got && a.hidden) push("  [ ] ???: keep poking around.");
+      else push(`  [${got ? "x" : " "}] ${a.title}: ${a.description}`);
     }
   }, [push, isUnlocked]);
 
@@ -333,7 +333,7 @@ export function Terminal({ onClose }: { onClose: () => void }) {
   const handleInitials = useCallback(
     async (raw: string) => {
       if (raw.trim() === "") {
-        push("Skipped — score not posted.");
+        push("Skipped. Score not posted.");
         pendingRef.current = null;
         setMode("shell");
         return;
@@ -417,7 +417,7 @@ export function Terminal({ onClose }: { onClose: () => void }) {
       <div aria-hidden className="absolute inset-0 bg-ink/40" />
 
       <div className="relative w-full max-w-2xl" onMouseDown={(e) => e.stopPropagation()}>
-        <WindowCard title="terminal — psy.sh" accent="violet">
+        <WindowCard title="terminal · psy.sh" accent="violet">
           <div
             ref={scrollRef}
             onClick={() => inputRef.current?.focus()}
@@ -457,7 +457,7 @@ export function Terminal({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="mt-3 flex items-center justify-between font-mono text-[11px] text-ink/60">
-            <span>type &apos;help&apos; — Esc to close</span>
+            <span>type &apos;help&apos; · Esc to close</span>
             <button
               type="button"
               onClick={onClose}
