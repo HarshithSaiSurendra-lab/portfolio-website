@@ -1,6 +1,7 @@
-import { ExternalLink, Github } from "lucide-react";
+import { Github } from "lucide-react";
 import { WindowCard } from "@/components/WindowCard";
 import { Reveal } from "@/components/Reveal";
+import { InvexsLink } from "@/components/interactive/InvexsLink";
 import { LINKS } from "@/data/profile";
 
 export function Invexs() {
@@ -34,14 +35,7 @@ export function Invexs() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    href={LINKS.invexs}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 border-2 border-ink bg-[var(--accent-lime)] px-4 py-2 font-mono text-sm font-bold text-on-accent shadow-block transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
-                  >
-                    <ExternalLink size={16} aria-hidden /> Visit invexsai.com
-                  </a>
+                  <InvexsLink />
                   <a
                     href={`${LINKS.github}/Invexsai`}
                     target="_blank"

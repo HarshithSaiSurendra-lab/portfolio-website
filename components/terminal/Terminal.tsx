@@ -9,6 +9,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { WindowCard } from "@/components/WindowCard";
 import { useInteractive } from "@/components/interactive/InteractiveProvider";
 import { ACHIEVEMENTS } from "@/data/achievements";
@@ -189,6 +190,7 @@ export function Terminal({ onClose }: { onClose: () => void }) {
   }, [unlock, push]);
 
   const startGame = useCallback(async () => {
+    track("minigame_played");
     unlock("arcade-play");
     const { NumberGame } = await import("./numberGame");
     const game = new NumberGame();

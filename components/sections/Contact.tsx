@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 import { Mail, Linkedin, Github, Send, Check } from "lucide-react";
 import { WindowCard } from "@/components/WindowCard";
 import { Reveal } from "@/components/Reveal";
@@ -37,6 +38,7 @@ export function Contact() {
         const j = await res.json().catch(() => ({}));
         throw new Error(j.error || "Something went wrong.");
       }
+      track("contact_submit");
       setStatus("sent");
       form.reset();
     } catch (err) {

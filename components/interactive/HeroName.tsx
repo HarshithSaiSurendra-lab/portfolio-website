@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 import { NAME_DISPLAY } from "@/data/profile";
 import { useInteractive } from "@/components/interactive/InteractiveProvider";
 
@@ -44,6 +45,7 @@ export function HeroName() {
     if (clicksRef.current < CLICKS_NEEDED) return;
 
     firedRef.current = true;
+    track("easter_egg_found");
     unlock("konami");
     setRevealed(true);
 

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HardDrive } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { useInteractive } from "@/components/interactive/InteractiveProvider";
 
 type Theme = "light" | "dark";
@@ -42,6 +43,7 @@ export function ThemeToggle() {
       } catch {
         /* private mode etc. */
       }
+      track("theme_toggled", { theme: next });
       if (next === "dark") unlock("night-owl");
       setTheme(next);
     },

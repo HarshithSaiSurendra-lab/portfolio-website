@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import dynamic from "next/dynamic";
+import { track } from "@vercel/analytics";
 import { AchievementToast } from "@/components/AchievementToast";
 import {
   ACHIEVEMENT_MAP,
@@ -95,6 +96,7 @@ export function InteractiveProvider({ children }: { children: ReactNode }) {
   );
 
   const notifyResumeDownload = useCallback(() => {
+    track("resume_download");
     if (Date.now() - loadTime.current <= SPEEDRUN_WINDOW_MS) {
       unlock("speedrun");
     }
@@ -102,6 +104,7 @@ export function InteractiveProvider({ children }: { children: ReactNode }) {
 
   const openTerminal = useCallback(() => {
     setTerminalOpen(true);
+    track("terminal_opened");
     unlock("hacker-voice");
   }, [unlock]);
 
