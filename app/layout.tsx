@@ -8,7 +8,7 @@ import "./globals.css";
 
 // Canonical site origin for absolute metadata URLs (OG/Twitter card images).
 // Currently the Vercel project URL; swap when a custom domain is decided (Q2).
-const SITE_URL = "https://portfolio-website-amber-nu.vercel.app";
+const SITE_URL = "https://sai-surendra.vercel.app";
 
 // Inline, render-blocking script: sets the theme class before first paint so
 // there is no flash-of-wrong-theme. Default = system preference; an explicit
