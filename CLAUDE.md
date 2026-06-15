@@ -111,11 +111,17 @@ Update the checkboxes as gates are passed. Phase details in spec §11.
       triggers (Hello World/Tourist/Speedrun/Hacker Voice/Night Owl/High Score)
       verified in both themes; Konami stays for Phase 6. Draft terminal/joke/achievement
       copy approved as-is (Psy may still tweak individual lines later).
-- [ ] **Phase 6 — Polish** (BSOD 404, visitor counter, boot screen, easter egg,
-      CRT toggle, save-slot picker) → 🚦 Gate 6: easter egg + boot review.
-      ADDED SCOPE: global number-game leaderboards on the shared Upstash/KV store —
-      (1) main board ranked by fewest tries then fastest time, showing name · tries
-      (time) · date; (2) separate win-streak board. Needs Upstash env vars (Psy).
+- [x] **Phase 6 — Polish** (BSOD 404, visitor counter, boot screen, easter egg,
+      CRT toggle, save-slot picker) → 🚦 Gate 6 — ✅ APPROVED.
+      ADDED SCOPE delivered: global number-game leaderboards on the shared Upstash/KV
+      store — (1) main board ranked by fewest tries then fastest time; (2) separate
+      win-streak board. Upstash (Vercel Marketplace) connected to the prod project;
+      KV_REST_API_* env vars injected; lib/kv.ts accepts KV_* or UPSTASH_* names.
+      Visitor counter live (seeded 250, real increments). Arcade desktop icon +
+      Insert Coin / win-in-1/2/3 achievements added; ticker line → "6 SIGNALS · 1
+      CONVICTION"; win-in-2 achievement = "Read My Mind". Leftover Phase-5 em-dashes
+      scrubbed from terminal/arcade/game copy. DRAFT humor approved as-is (Psy may
+      fine-tune individual lines at the end). Live: portfolio-website-amber-nu.vercel.app.
 - [ ] **Phase 7 — QA & Launch** (responsive/a11y/reduced-motion pass, Android test,
       OG image, analytics, Lighthouse, deploy) → 🚦 Gate 7: final walkthrough
 
