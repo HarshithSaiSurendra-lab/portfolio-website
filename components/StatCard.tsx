@@ -12,6 +12,9 @@ export function StatCard({ accent = "cyan" }: { accent?: Accent }) {
         <div className="min-w-0">
           <p className="text-[10px] uppercase tracking-widest text-ink/60">Class</p>
           <p className="font-bold leading-tight text-ink">{CHARACTER.className}</p>
+          {CHARACTER.classSub && (
+            <p className="text-[11px] leading-tight text-ink/70">{CHARACTER.classSub}</p>
+          )}
           <p className="mt-2 text-[10px] uppercase tracking-widest text-ink/60">Level</p>
           <p className="text-2xl font-bold leading-none text-ink">{CHARACTER.level}</p>
         </div>
