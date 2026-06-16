@@ -41,6 +41,25 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Custom Y2K cursor: a sticker-style arrow (white fill, thick ink outline) to
+   match the window/sticker chrome. Clickable elements get a violet-fill variant
+   so interactivity reads in the brand accent. Falls back to system arrow/pointer
+   where SVG cursors aren't supported; absent entirely on touch devices. */
+html {
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M3%203L3%2020L8%2015.5L11.2%2021.5L14%2020.2L10.8%2014.5L17%2014.5Z'%20fill='%23ffffff'%20stroke='%2316161f'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3C/svg%3E")
+      3 3,
+    auto;
+}
+a,
+button,
+[role="button"],
+summary,
+label[for] {
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M3%203L3%2020L8%2015.5L11.2%2021.5L14%2020.2L10.8%2014.5L17%2014.5Z'%20fill='%237c5cff'%20stroke='%2316161f'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3C/svg%3E")
+      3 3,
+    pointer;
+}
+
 /* Y2K dotted-selection focus rectangle (accessibility: visible focus). */
 :focus-visible {
   outline: 2px dotted var(--ink);
@@ -264,21 +283,22 @@ section[id] {
   inset: 0;
   background-image: radial-gradient(
     circle,
-    color-mix(in srgb, var(--ink) 13%, transparent) 1.2px,
-    transparent 1.2px
+    color-mix(in srgb, var(--ink) 19%, transparent) 1.3px,
+    transparent 1.3px
   );
   background-size: 22px 22px;
 }
 .bg-fx-glow {
   position: absolute;
-  top: -350px;
-  left: -350px;
-  width: 700px;
-  height: 700px;
+  top: -260px;
+  left: -260px;
+  width: 520px;
+  height: 520px;
   background: radial-gradient(
     circle,
-    color-mix(in srgb, var(--accent-violet) 16%, transparent) 0%,
-    transparent 60%
+    color-mix(in srgb, var(--accent-violet) 34%, transparent) 0%,
+    color-mix(in srgb, var(--accent-violet) 14%, transparent) 30%,
+    transparent 55%
   );
   transform: translate(50vw, 28vh);
   will-change: transform;
