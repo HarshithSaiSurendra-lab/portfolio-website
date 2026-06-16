@@ -82,7 +82,7 @@ export function ThemeToggle() {
           onClick={() => setOpen((o) => !o)}
           aria-haspopup="menu"
           aria-expanded={open}
-          aria-label="Select save file (theme)"
+          aria-label={`${current.label} theme active. Select save file.`}
           className="inline-flex items-center gap-2 border-2 border-ink bg-surface px-3 py-2 font-mono text-sm text-ink shadow-block transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0 active:translate-y-0"
         >
           {mounted ? (

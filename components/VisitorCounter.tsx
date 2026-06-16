@@ -42,6 +42,7 @@ export function VisitorCounter() {
     <span className="inline-flex items-center gap-2 align-middle font-mono text-xs text-ink/70">
       <span className="uppercase tracking-widest">You are visitor</span>
       <span
+        role="img"
         className="inline-flex gap-px rounded-[2px] border-2 border-ink bg-[#0c0c14] px-1.5 py-1"
         aria-label={count === null ? "loading visitor count" : `visitor number ${count}`}
       >
