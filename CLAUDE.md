@@ -122,8 +122,28 @@ Update the checkboxes as gates are passed. Phase details in spec §11.
       CONVICTION"; win-in-2 achievement = "Read My Mind". Leftover Phase-5 em-dashes
       scrubbed from terminal/arcade/game copy. DRAFT humor approved as-is (Psy may
       fine-tune individual lines at the end). Live: portfolio-website-amber-nu.vercel.app.
-- [ ] **Phase 7 — QA & Launch** (responsive/a11y/reduced-motion pass, Android test,
-      OG image, analytics, Lighthouse, deploy) → 🚦 Gate 7: final walkthrough
+- [x] **Phase 7 — QA & Launch** (responsive/a11y/reduced-motion pass, Android test,
+      OG image, analytics, Lighthouse, deploy) → 🚦 Gate 7 — ✅ APPROVED.
+      Live at sai-surendra.vercel.app (final domain; SITE_URL + OG/Twitter metadata
+      repointed). Lighthouse mobile 95/97/96/100, CLS 0. A11y audit pass + fixes:
+      visitor-counter role=img, theme-toggle accessible-name, skip-to-content link
+      (#main-content on home/resume/404). Mobile verified via emulation (375x812 +
+      412x915 Android, both themes — physical device unavailable); fixed /resume
+      horizontal overflow. Favicon = terminal >_ (app/icon.svg + apple-icon.png).
+      SEO bundle: app/sitemap.ts + app/robots.ts + Person JSON-LD. Vercel Analytics +
+      Speed Insights live with custom events. Dock scroll-spy active-section highlight.
+      Background: brighter dots + tighter violet cursor-glow; custom Y2K SVG cursor.
+      Blinking hero prompt caret. Content edits: shelf books (Understanding Analysis →
+      The Mom Test) + learning (full-stack/ML/neural nets) + trading = real holdings
+      (SPCX/NVDA/PLTR/GOOGL + others); Excel proficiency 100 → 95; EQUIPPED skills
+      restored to fuller core; quest log main quest now two-sided (Building Invexs AI |
+      GT MS Econ), Real Analysis quest → Building new projects; experience Invexs role
+      → Co-founder (Farely kept as Co-founder & CFO); stale real-analysis jokes
+      refreshed (ticker/stat/terminal); character class = Finance + "Learning ML & CS".
+      KNOWN: Next.js 14 (high) + postcss (moderate) npm-audit advisories remain —
+      only fix is breaking Next 16 upgrade (violates Next-14 constraint); platform-
+      mitigated on Vercel. OPEN (non-blocking, Psy's call): QR placement, custom
+      domain, mobile dock scroll-hint, live contact-form spot-check.
 
 ## 6. Git Discipline
 
