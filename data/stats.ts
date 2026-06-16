@@ -2,7 +2,7 @@
 // Level = years of experience (Q5/Q9): first build = Aug 2024 → Level 1, ~80% XP.
 
 export const CHARACTER = {
-  className: "Finance / CS multiclass",
+  className: "Learning ML",
   level: 1,
   xpPercent: 80, // progress toward Level 2
 };
