@@ -27,7 +27,7 @@ export default function Home() {
       <Hero />
       <Ticker items={TICKER_ITEMS} />
 
-      <main>
+      <main id="main-content">
         <About />
         <Experience />
         <Invexs />

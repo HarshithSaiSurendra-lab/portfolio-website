@@ -22,6 +22,9 @@ export function Hero() {
       <div className="relative z-[2] mx-auto max-w-6xl px-6 py-20 sm:py-28">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/60">
           C:\Users\Sai\Desktop&gt; welcome.exe
+          <span className="hero-caret" aria-hidden>
+            ▋
+          </span>
         </p>
 
         <div className="mt-4">

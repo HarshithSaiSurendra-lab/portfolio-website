@@ -247,6 +247,25 @@ label[for] {
   z-index: 1;
 }
 
+/* Blinking command-prompt caret in the hero. Frozen (steady) under reduced
+   motion via the global guard below. */
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-caret {
+  display: inline-block;
+  margin-left: 0.15em;
+  color: var(--accent-violet);
+  animation: caret-blink 1.1s step-end infinite;
+}
+
 /* Smooth in-page scrolling, disabled under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -312,7 +331,8 @@ section[id] {
   .boot-bar,
   .confetti-piece,
   .crt-overlay,
-  .crt-screen {
+  .crt-screen,
+  .hero-caret {
     animation: none !important;
     transform: none !important;
   }

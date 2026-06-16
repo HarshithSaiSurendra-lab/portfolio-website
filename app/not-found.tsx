@@ -10,6 +10,7 @@ export const metadata = {
 export default function NotFound() {
   return (
     <main
+      id="main-content"
       className="scanlines relative flex min-h-screen flex-col items-center justify-center px-6 py-20 text-center font-mono"
       style={{ backgroundColor: "#1747c0", color: "#ffffff" }}
     >

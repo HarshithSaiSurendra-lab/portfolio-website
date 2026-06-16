@@ -54,7 +54,7 @@ export default function ResumePage() {
       </div>
 
       {/* The résumé document */}
-      <main className="mx-auto mt-5 max-w-3xl border-[3px] border-ink bg-surface shadow-block">
+      <main id="main-content" className="mx-auto mt-5 max-w-3xl border-[3px] border-ink bg-surface shadow-block">
         {/* Window title bar (decorative, non-interactive on this page) */}
         <div
           className="flex items-center gap-2 border-b-[3px] border-ink px-3 py-2"

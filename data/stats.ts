@@ -22,6 +22,6 @@ export const STAT_BARS: StatBar[] = [
   { label: "Anime Knowledge", value: 92, joke: true },
   { label: "Shipping Velocity", value: 83, joke: true },
   { label: "Side-Quest Completion", value: 60, joke: true },
-  { label: "Patience for Real Analysis Proofs", value: 40, joke: true },
+  { label: "Patience for Slow Backtests", value: 40, joke: true },
   { label: "Sleep Schedule", value: 15, joke: true },
 ];

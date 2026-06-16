@@ -11,6 +11,6 @@ export const TICKER_ITEMS: TickerItem[] = [
   { text: "CURRENTLY BUILDING SOMETHING" },
   { text: "HOLDING: SPCX ▲ · NVDA ▲ · PLTR ▲ · GOOGL ▲", accent: "cyan" },
   { text: "2ND PLACE · AI ATL HACKATHON", accent: "lime" },
-  { text: "STILL CONFUSED ABOUT REAL ANALYSIS PROOFS" },
+  { text: "TEACHING NEURAL NETS TO BEHAVE" },
   { text: "6 SIGNALS · 1 CONVICTION", accent: "violet" },
 ];

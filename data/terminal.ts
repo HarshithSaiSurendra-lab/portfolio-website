@@ -10,7 +10,7 @@ export const JOKES: string[] = [
   "I don't always test my code, but when I do, it's in production. (kidding. mostly.)",
   "There are 10 kinds of people: those who read binary, and those who don't.",
   "Finance major who learned to code so the spreadsheets would stop judging him.",
-  "Real Analysis proof status: still loading. please hold.",
+  "Neural net status: still learning. aren't we all.",
   "It's not procrastinating if the backtest is still running.",
   "I named a variable `temp` in 2023. it's load-bearing now.",
 ];
