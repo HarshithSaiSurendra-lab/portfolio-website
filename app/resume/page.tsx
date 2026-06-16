@@ -33,7 +33,7 @@ export default function ResumePage() {
   return (
     <div className="min-h-screen px-4 py-6 sm:px-6 sm:py-10">
       {/* Top action bar */}
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3">
+      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3">
         <a
           href="/"
           className="inline-flex items-center gap-2 border-2 border-ink bg-surface px-3 py-1.5 font-mono text-xs font-bold text-ink shadow-[3px_3px_0_0_var(--ink)] transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
@@ -75,7 +75,7 @@ export default function ResumePage() {
             <p className="mt-1 font-mono text-[11px] text-ink/55">
               {FULL_NAME}
             </p>
-            <p className="mt-2 font-mono text-[11px] leading-relaxed text-ink/75 sm:text-xs">
+            <p className="mt-2 break-words font-mono text-[11px] leading-relaxed text-ink/75 sm:text-xs">
               {RESUME_CONTACT.phone}
               <span aria-hidden className="px-1.5 text-ink/40">|</span>
               <a href={`mailto:${RESUME_CONTACT.email}`} className="underline-offset-2 hover:underline">
