@@ -9,15 +9,24 @@ export type Quest = {
   caption?: string;
 };
 
-export const MAIN_QUEST: Quest = {
-  title: "GT MS Economics",
-  detail: "Begins August 2026",
-  caption: "QUEUED",
-};
+// Two headline objectives, shown side by side: building Invexs AI now, and the
+// GT MS Economics program next.
+export const MAIN_QUESTS: Quest[] = [
+  {
+    title: "Building Invexs AI",
+    detail: "Co-founder · actively building",
+    caption: "IN PROGRESS",
+  },
+  {
+    title: "GT MS Economics",
+    detail: "Begins August 2026",
+    caption: "QUEUED",
+  },
+];
 
 export const ACTIVE_QUESTS: Quest[] = [
   { title: "GRE: 165+ Quant", detail: "Test in September", caption: "IN PROGRESS" },
-  { title: "Real Analysis (Abbott)", detail: "Understanding Analysis", caption: "IN PROGRESS" },
+  { title: "Building new projects", detail: "Side projects and experiments", caption: "IN PROGRESS" },
   { title: "Karpathy: Zero to Hero", detail: "Target: end of June", caption: "IN PROGRESS" },
   { title: "Stanford CS224n", detail: "Starts July 1", caption: "QUEUED" },
 ];

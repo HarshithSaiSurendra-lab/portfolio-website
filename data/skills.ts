@@ -10,30 +10,41 @@ export type SkillGroup = {
 
 export const EQUIPPED: SkillGroup[] = [
   {
-    id: "programming",
-    label: "programming & tools/",
+    id: "languages",
+    label: "languages & data/",
     skills: [
       "Python (pandas · NumPy · scikit-learn)",
       "TypeScript",
+      "JavaScript",
+      "SQL",
+      "R",
+      "Java",
+      "C++",
+    ],
+  },
+  {
+    id: "build",
+    label: "build & cloud/",
+    skills: [
       "React",
       "Next.js",
-      "SQL",
+      "Tailwind CSS",
+      "Git",
       "AWS",
+      "Azure",
       "OpenAI API",
-      "Stripe · Plaid API",
     ],
   },
   {
     id: "finance",
     label: "finance & analytics/",
     skills: [
-      "DCF",
-      "LBO",
-      "M&A",
-      "Financial Modeling",
+      "Financial Modeling (DCF · LBO · M&A)",
       "Econometrics",
       "Portfolio Theory (CAPM · Sharpe · Alpha/Beta)",
+      "Unit Economics",
       "Forecasting",
+      "Tableau · Power BI",
     ],
   },
 ];
@@ -44,7 +55,7 @@ export type Proficiency = { label: string; value: number };
 // loading bar with the percent printed inside it.
 // VALUES ARE MY ESTIMATE based on Sai's background — he verifies at Gate 4.
 export const PROFICIENCY: Proficiency[] = [
-  { label: "Excel", value: 100 },
+  { label: "Excel", value: 95 },
   { label: "HTML & CSS", value: 82 },
   { label: "Python", value: 80 },
   { label: "React", value: 80 },

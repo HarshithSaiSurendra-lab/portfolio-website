@@ -1,7 +1,7 @@
 import { WindowCard } from "@/components/WindowCard";
 import { LoadingBar } from "@/components/LoadingBar";
 import { Reveal } from "@/components/Reveal";
-import { MAIN_QUEST, ACTIVE_QUESTS } from "@/data/quests";
+import { MAIN_QUESTS, ACTIVE_QUESTS } from "@/data/quests";
 
 export function QuestLog() {
   return (
@@ -13,7 +13,7 @@ export function QuestLog() {
       <Reveal>
         <div className="mt-8">
           <WindowCard title="quest_log.sav" accent="violet">
-            {/* Main quest */}
+            {/* Main quest — two headline objectives side by side */}
             <div className="border-2 border-ink bg-bg p-4">
               <span
                 className="inline-block border-2 border-ink px-1.5 py-0.5 font-mono text-[10px] font-bold text-on-accent"
@@ -21,10 +21,21 @@ export function QuestLog() {
               >
                 ★ MAIN QUEST
               </span>
-              <p className="mt-2 font-body text-xl font-bold text-ink">
-                {MAIN_QUEST.title}
-              </p>
-              <p className="font-mono text-sm text-ink/70">{MAIN_QUEST.detail}</p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {MAIN_QUESTS.map((q) => (
+                  <div key={q.title} className="border-2 border-ink/20 p-3">
+                    <p className="font-body text-xl font-bold text-ink">{q.title}</p>
+                    {q.detail && (
+                      <p className="font-mono text-sm text-ink/70">{q.detail}</p>
+                    )}
+                    {q.caption && (
+                      <span className="mt-2 inline-block border-2 border-ink/30 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink/60">
+                        {q.caption}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Active quests */}

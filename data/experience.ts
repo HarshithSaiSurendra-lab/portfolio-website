@@ -13,7 +13,7 @@ export type Job = {
 export const EXPERIENCE: Job[] = [
   {
     company: "Invexs AI",
-    role: "Co-founder & CFO",
+    role: "Co-founder",
     period: "Jan 2026 – Present",
     location: "Atlanta, GA · Georgia Tech CREATE-X",
     current: true,

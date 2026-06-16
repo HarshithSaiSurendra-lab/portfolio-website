@@ -14,7 +14,7 @@ export const SHELF: ShelfFolder[] = [
     label: "books/",
     blurb: "What's on the desk right now.",
     items: [
-      "Understanding Analysis · Stephen Abbott",
+      "The Mom Test · Rob Fitzpatrick",
       "Atomic Habits · James Clear",
       "The Art of War · Sun Tzu",
     ],
@@ -24,6 +24,8 @@ export const SHELF: ShelfFolder[] = [
     label: "learning/",
     blurb: "Active self-study tracks.",
     items: [
+      "Full-stack web dev (React · Next.js · Node)",
+      "Machine learning & neural networks for AI",
       "Karpathy · Neural Networks: Zero to Hero",
       "Stanford CS224n · NLP with Deep Learning",
     ],
@@ -31,11 +33,13 @@ export const SHELF: ShelfFolder[] = [
   {
     id: "trading",
     label: "trading/",
-    blurb: "The quant hobby bench.",
+    blurb: "What I'm holding right now.",
     items: [
-      "6-indicator volume-flow system",
-      "QuantConnect backtesting",
-      "Market microstructure curiosity",
+      "SPCX",
+      "NVDA (a bit)",
+      "PLTR (some)",
+      "GOOGL (some)",
+      "Plus a few smaller positions.",
     ],
   },
   {
