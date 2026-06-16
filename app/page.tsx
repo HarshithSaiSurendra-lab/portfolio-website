@@ -12,12 +12,14 @@ import { Arcade } from "@/components/arcade/Arcade";
 import { ResumeCTA } from "@/components/sections/ResumeCTA";
 import { Contact } from "@/components/sections/Contact";
 import { VisitorCounter } from "@/components/VisitorCounter";
+import { BackgroundFX } from "@/components/BackgroundFX";
 import { TICKER_ITEMS } from "@/data/ticker";
 
 export default function Home() {
   return (
     <>
-      {/* Plain theme toggle (set-piece CRT version lands in Phase 6). */}
+      <BackgroundFX />
+
       <div className="fixed right-3 top-3 z-50">
         <ThemeToggle />
       </div>

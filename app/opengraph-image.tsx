@@ -7,7 +7,7 @@ import { ImageResponse } from "next/og";
 // than failing the build.
 export const runtime = "nodejs";
 export const alt =
-  "Sai Surendra — Co-founder & CFO @ Invexs AI, incoming MS Econ @ Georgia Tech";
+  "Sai Surendra — Co-founder @ Invexs AI, incoming MS Econ @ Georgia Tech";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -105,7 +105,7 @@ export default async function OpengraphImage() {
                 color: "#b9b4cc",
               }}
             >
-              Co-founder &amp; CFO @ Invexs AI · Incoming MS Econ @ Georgia Tech
+              Co-founder @ Invexs AI · Incoming MS Econ @ Georgia Tech
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 40 }}>

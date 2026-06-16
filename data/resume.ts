@@ -61,7 +61,7 @@ export const RESUME_EXPERIENCE: ResumeJob[] = [
   {
     company: "Invexs AI",
     tagline: "AI Agent Fleet Control Platform",
-    role: "Co-Founder & CFO | Built within Georgia Tech CREATE-X Startup Launch",
+    role: "Co-Founder | Built within Georgia Tech CREATE-X Startup Launch",
     location: "Atlanta, GA",
     period: "Jan 2026 – Present",
     bullets: [

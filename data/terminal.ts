@@ -3,7 +3,7 @@
 
 // `whoami`
 export const WHOAMI =
-  "sai: co-founder & CFO @ Invexs AI. Builds to learn. Currently caffeinated.";
+  "sai: co-founder @ Invexs AI. Builds to learn. Currently caffeinated.";
 
 // `joke` — rotates through these one at a time.
 export const JOKES: string[] = [
@@ -27,7 +27,7 @@ export const SECTION_SUMMARIES: Record<string, string> = {
   about:
     "Neuroscience → business at UGA Terry → building startups, trading systems, and ML pipelines.",
   experience:
-    "Invexs AI (co-founder & CFO), Quarstech, Dallas Venture Capital, Farely. See career.log.",
+    "Invexs AI (co-founder), Quarstech, Dallas Venture Capital, Farely. See career.log.",
   invexs:
     "Invexs AI: an enterprise AI agent control plane, built through Georgia Tech CREATE-X.",
   projects:

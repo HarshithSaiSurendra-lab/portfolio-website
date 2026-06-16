@@ -5,7 +5,7 @@ export const NAME_DISPLAY = "SAI SURENDRA";
 export const FULL_NAME = "Harshith Sai Vardhan Reddy Surendra";
 
 export const TAGLINE =
-  "Co-founder & CFO @ Invexs AI · Incoming MS Econ @ Georgia Tech · Running on caffeine and curiosity";
+  "Co-founder @ Invexs AI · Incoming MS Econ @ Georgia Tech · Running on caffeine and curiosity";
 
 export const LINKS = {
   github: "https://github.com/HarshithSaiSurendra-lab",

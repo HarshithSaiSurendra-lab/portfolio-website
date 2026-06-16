@@ -15,6 +15,9 @@ export const SHELF: ShelfFolder[] = [
     blurb: "What's on the desk right now.",
     items: [
       "The Mom Test · Rob Fitzpatrick",
+      "The Lean Startup · Eric Ries",
+      "The Hard Thing About Hard Things · Ben Horowitz",
+      "Hooked · Nir Eyal",
       "Atomic Habits · James Clear",
       "The Art of War · Sun Tzu",
     ],

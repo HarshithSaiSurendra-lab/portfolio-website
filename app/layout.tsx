@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Sai Surendra",
   },
   description:
-    "Portfolio of Harshith Sai Vardhan Reddy Surendra: co-founder & CFO of Invexs AI, incoming MS Econ @ Georgia Tech.",
+    "Portfolio of Harshith Sai Vardhan Reddy Surendra: co-founder of Invexs AI, incoming MS Econ @ Georgia Tech.",
   keywords: [
     "Sai Surendra",
     "Harshith Sai Vardhan Reddy Surendra",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     siteName: "Sai Surendra",
     title: "Sai Surendra",
     description:
-      "Co-founder & CFO of Invexs AI, incoming MS Econ @ Georgia Tech. Fun person, serious work.",
+      "Co-founder of Invexs AI, incoming MS Econ @ Georgia Tech. Fun person, serious work.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Sai Surendra",
     description:
-      "Co-founder & CFO of Invexs AI, incoming MS Econ @ Georgia Tech. Fun person, serious work.",
+      "Co-founder of Invexs AI, incoming MS Econ @ Georgia Tech. Fun person, serious work.",
   },
 };
 

@@ -13,7 +13,7 @@ import {
 
 export const metadata: Metadata = {
   title: `${FULL_NAME} · Résumé`,
-  description: `Résumé of ${FULL_NAME} (Sai Surendra): Co-founder & CFO of Invexs AI, incoming MS Econ @ Georgia Tech.`,
+  description: `Résumé of ${FULL_NAME} (Sai Surendra): Co-founder of Invexs AI, incoming MS Econ @ Georgia Tech.`,
 };
 
 // Plain <a> (not next/link) so the browser performs a real cross-document

@@ -30,7 +30,7 @@ export function Invexs() {
                   aren&apos;t optional.
                 </p>
                 <p className="mt-4 font-body text-base text-ink/80">
-                  I&apos;m co-founder &amp; CFO. We&apos;re actively building it
+                  I&apos;m co-founder. We&apos;re actively building it
                   through Georgia Tech CREATE-X.
                 </p>
 
@@ -50,7 +50,7 @@ export function Invexs() {
               <dl className="space-y-3 border-t-2 border-ink pt-4 font-mono text-sm lg:border-l-2 lg:border-t-0 lg:pl-6 lg:pt-0">
                 <div>
                   <dt className="text-[10px] uppercase tracking-widest text-ink/60">Role</dt>
-                  <dd className="text-ink">Co-founder &amp; CFO</dd>
+                  <dd className="text-ink">Co-founder</dd>
                 </div>
                 <div>
                   <dt className="text-[10px] uppercase tracking-widest text-ink/60">Program</dt>

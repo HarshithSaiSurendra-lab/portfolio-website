@@ -11,13 +11,13 @@ import { AchievementToast } from "@/components/AchievementToast";
 // NOTE: all copy below is DRAFT sample content for component review only.
 // Ticker lines, stat labels, and joke values are approved at Gate 3 (spec §11).
 const TICKER_ITEMS = [
-  "SAI/USD ▲ +∞%",
-  "BUILDING INVEXS AI",
-  "GT MS ECON · FALL '26",
-  "CURRENTLY DEBUGGING SOMETHING",
-  "2ND PLACE · AI ATL HACKATHON",
-  "STILL CONFUSED ABOUT REAL ANALYSIS PROOFS",
-  "6-INDICATOR TRADING SYSTEM: ONLINE",
+  { text: "SAI/USD ▲ +∞%", accent: "lime" as const },
+  { text: "BUILDING INVEXS AI", accent: "violet" as const },
+  { text: "GT MS ECON · FALL '26" },
+  { text: "CURRENTLY DEBUGGING SOMETHING" },
+  { text: "2ND PLACE · AI ATL HACKATHON", accent: "cyan" as const },
+  { text: "STILL CONFUSED ABOUT REAL ANALYSIS PROOFS" },
+  { text: "6-INDICATOR TRADING SYSTEM: ONLINE" },
 ];
 
 const SAMPLE_ACHIEVEMENTS = [

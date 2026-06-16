@@ -69,6 +69,24 @@ body {
   animation-play-state: paused;
 }
 
+/* Soft edge fade so the marquee dissolves at both ends instead of hard-cutting. */
+.ticker {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
 /* ── Indeterminate LoadingBar (unknown progress) ────────────────────────── */
 /* Diagonal stripes that drift. Animated via transform: translateX on an
    oversized stripe layer (GPU-composited, no per-frame repaint) — this is the
@@ -227,6 +245,43 @@ body {
 /* Dock/anchor offset so smooth-scroll targets aren't jammed to the top edge. */
 section[id] {
   scroll-margin-top: 1.5rem;
+}
+
+/* ── Interactive desktop background (home only) ──────────────────────────── */
+/* Static dot-grid + a soft accent glow form the base (and the reduced-motion /
+   touch fallback). On fine-pointer devices a cursor-tracked glow rides on top,
+   moved with a cheap GPU transform (BackgroundFX sets the translate). Fixed and
+   behind all content; never intercepts pointer events. */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+.bg-fx-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--ink) 13%, transparent) 1.2px,
+    transparent 1.2px
+  );
+  background-size: 22px 22px;
+}
+.bg-fx-glow {
+  position: absolute;
+  top: -350px;
+  left: -350px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-violet) 16%, transparent) 0%,
+    transparent 60%
+  );
+  transform: translate(50vw, 28vh);
+  will-change: transform;
 }
 
 /* ── Global reduced-motion guard ────────────────────────────────────────── */
